@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'
-import { Map, ChevronRight, ChevronDown, Clock, Target, CheckCircle } from 'lucide-react'
-import { generateRoadmap } from '../lib/gemini'
+import { BookOpen, Copy, CheckCircle, ExternalLink, ArrowLeft } from 'lucide-react'
+import { generateLibraryNotes } from '../lib/gemini'
 
-const Roadmap = () => {
+const Library = () => {
   const { isSignedIn } = useAuth()
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
-  const [roadmapData, setRoadmapData] = useState<any>(null)
+  const [notesData, setNotesData] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [expandedPhases, setExpandedPhases] = useState<Set<number>>(new Set())
+  const [copiedCode, setCopiedCode] = useState<string | null>(null)
 
   const languages = [
     { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
@@ -29,49 +29,34 @@ const Roadmap = () => {
     
     setIsLoading(true)
     setSelectedLanguage(language)
-    setExpandedPhases(new Set([0])) // Expand first phase by default
     
     try {
-      const roadmap = await generateRoadmap(language)
-      setRoadmapData(roadmap)
+      const notes = await generateLibraryNotes(language)
+      setNotesData(notes)
     } catch (error) {
-      console.error('Error generating roadmap:', error)
+      console.error('Error generating notes:', error)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const togglePhaseExpansion = (phaseIndex: number) => {
-    const newExpanded = new Set(expandedPhases)
-    if (newExpanded.has(phaseIndex)) {
-      newExpanded.delete(phaseIndex)
-    } else {
-      newExpanded.add(phaseIndex)
-    }
-    setExpandedPhases(newExpanded)
-  }
-
   const handleBackToLanguages = () => {
     setSelectedLanguage(null)
-    setRoadmapData(null)
-    setExpandedPhases(new Set())
+    setNotesData(null)
   }
 
-  const getPhaseColor = (phaseIndex: number) => {
-    const colors = [
-      'from-green-400 to-blue-500',
-      'from-blue-400 to-purple-500',
-      'from-purple-400 to-pink-500',
-      'from-pink-400 to-red-500'
-    ]
-    return colors[phaseIndex % colors.length]
+  const copyToClipboard = async (code: string, id: string) => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopiedCode(id)
+      setTimeout(() => setCopiedCode(null), 2000)
+    } catch (error) {
+      console.error('Failed to copy code:', error)
+    }
   }
 
-  const getPhaseIcon = (phaseIndex: number) => {
-    if (phaseIndex === 0) return '🌱'
-    if (phaseIndex === 1) return '🌿'
-    if (phaseIndex === 2) return '🌳'
-    return '🏆'
+  const getYouTubeSearchUrl = (language: string) => {
+    return `https://www.youtube.com/results?search_query=${encodeURIComponent(language + ' programming tutorial')}`
   }
 
   if (isLoading) {
@@ -81,14 +66,14 @@ const Roadmap = () => {
           <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-8 rounded-full border border-purple-500/30 w-32 h-32 mx-auto flex items-center justify-center mb-8">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-400 border-t-transparent"></div>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-4">Generating Roadmap...</h2>
-          <p className="text-gray-300">Our AI is creating a personalized learning path for {selectedLanguage}</p>
+          <h2 className="text-2xl font-bold text-white mb-4">Generating Notes...</h2>
+          <p className="text-gray-300">Our AI is creating comprehensive notes for {selectedLanguage}</p>
         </div>
       </div>
     )
   }
 
-  if (selectedLanguage && roadmapData) {
+  if (selectedLanguage && notesData) {
     return (
       <div className="min-h-screen">
         <section className="container mx-auto px-6 py-20">
@@ -98,110 +83,139 @@ const Roadmap = () => {
               onClick={handleBackToLanguages}
               className="mr-6 p-2 hover:bg-purple-500/20 rounded-lg transition-colors"
             >
-              <ChevronRight className="w-6 h-6 text-purple-400 transform rotate-180" />
+              <ArrowLeft className="w-6 h-6 text-purple-400" />
             </button>
             <div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {roadmapData.title}
+                {selectedLanguage} Notes
               </h1>
-              <p className="text-gray-300 mt-2">Your personalized learning journey</p>
+              <p className="text-gray-300 mt-2">Comprehensive programming guide</p>
             </div>
           </div>
 
-          {/* Roadmap Timeline */}
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {roadmapData.phases?.map((phase: any, phaseIndex: number) => {
-                const isExpanded = expandedPhases.has(phaseIndex)
+          {/* Notes Content */}
+          <div className="max-w-6xl mx-auto space-y-8">
+            {/* Theory Section */}
+            {notesData.theory && (
+              <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                  <BookOpen className="w-6 h-6 mr-3 text-purple-400" />
+                  Theory & Concepts
+                </h2>
+                <div className="prose prose-invert max-w-none">
+                  <div className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+                    {notesData.theory}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Code Examples */}
+            {notesData.codeExamples && notesData.codeExamples.length > 0 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-white flex items-center">
+                  <Copy className="w-6 h-6 mr-3 text-purple-400" />
+                  Code Examples
+                </h2>
                 
-                return (
-                  <div key={phaseIndex} className="relative">
-                    {/* Connecting Line */}
-                    {phaseIndex < roadmapData.phases.length - 1 && (
-                      <div className="absolute left-8 top-20 w-0.5 h-12 bg-gradient-to-b from-purple-500 to-pink-500"></div>
-                    )}
-                    
-                    <div className="flex items-start">
-                      {/* Phase Icon */}
-                      <div className={`flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-r ${getPhaseColor(phaseIndex)} flex items-center justify-center text-2xl shadow-lg z-10`}>
-                        {getPhaseIcon(phaseIndex)}
-                      </div>
-                      
-                      {/* Phase Content */}
-                      <div className="flex-grow ml-6">
+                {notesData.codeExamples.map((example: any, index: number) => (
+                  <div key={index} className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20 overflow-hidden">
+                    <div className="p-6 border-b border-purple-500/20">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-white">{example.title}</h3>
                         <button
-                          onClick={() => togglePhaseExpansion(phaseIndex)}
-                          className="w-full text-left bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 group"
+                          onClick={() => copyToClipboard(example.code, `code-${index}`)}
+                          className="flex items-center space-x-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 px-3 py-2 rounded-lg transition-colors"
                         >
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <div className="flex items-center mb-2">
-                                <h3 className="text-2xl font-bold text-white mr-4">{phase.phase}</h3>
-                                {phase.duration && (
-                                  <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30 flex items-center">
-                                    <Clock className="w-4 h-4 mr-1" />
-                                    {phase.duration}
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-gray-300">
-                                {phase.topics?.length || 0} topics to master in this phase
-                              </p>
-                            </div>
-                            
-                            <ChevronDown className={`w-6 h-6 text-purple-400 transition-transform group-hover:text-purple-300 ${isExpanded ? 'rotate-180' : ''}`} />
-                          </div>
+                          {copiedCode === `code-${index}` ? (
+                            <>
+                              <CheckCircle className="w-4 h-4" />
+                              <span className="text-sm">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" />
+                              <span className="text-sm">Copy</span>
+                            </>
+                          )}
                         </button>
-                        
-                        {/* Phase Topics */}
-                        {isExpanded && (
-                          <div className="mt-4 space-y-4">
-                            {phase.topics?.map((topic: any, topicIndex: number) => (
-                              <div key={topicIndex} className="bg-gradient-to-r from-purple-500/5 to-pink-500/5 p-6 rounded-xl border border-purple-500/10">
-                                <div className="flex items-start">
-                                  <div className="flex-shrink-0 mr-4 mt-1">
-                                    <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30">
-                                      <Target className="w-4 h-4 text-purple-400" />
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="flex-grow">
-                                    <h4 className="text-lg font-semibold text-white mb-2">{topic.title}</h4>
-                                    <p className="text-gray-300 mb-4">{topic.description}</p>
-                                    
-                                    {topic.subtopics && topic.subtopics.length > 0 && (
-                                      <div>
-                                        <h5 className="text-sm font-medium text-purple-300 mb-3">Key Concepts:</h5>
-                                        <div className="grid md:grid-cols-2 gap-2">
-                                          {topic.subtopics.map((subtopic: string, subtopicIndex: number) => (
-                                            <div key={subtopicIndex} className="flex items-center">
-                                              <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-                                              <span className="text-sm text-gray-300">{subtopic}</span>
-                                            </div>
-                                          ))}
-                                        </div>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
                       </div>
+                      {example.description && (
+                        <p className="text-gray-300 mt-2">{example.description}</p>
+                      )}
+                    </div>
+                    
+                    <div className="bg-black/40 p-6">
+                      <pre className="overflow-x-auto">
+                        <code className="text-green-400 text-sm whitespace-pre">
+                          {example.code}
+                        </code>
+                      </pre>
                     </div>
                   </div>
-                )
-              })}
+                ))}
+              </div>
+            )}
+
+            {/* YouTube Learning Resources */}
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <ExternalLink className="w-6 h-6 mr-3 text-purple-400" />
+                Additional Learning Resources
+              </h2>
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                <a
+                  href={getYouTubeSearchUrl(selectedLanguage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 p-4 rounded-lg transition-colors group"
+                >
+                  <div className="flex items-center">
+                    <div className="bg-red-500 p-2 rounded-lg mr-3">
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-semibold group-hover:text-red-300 transition-colors">
+                        YouTube Tutorials
+                      </h3>
+                      <p className="text-gray-300 text-sm">
+                        Watch {selectedLanguage} programming tutorials
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                
+                <a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(selectedLanguage + ' programming documentation')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 p-4 rounded-lg transition-colors group"
+                >
+                  <div className="flex items-center">
+                    <div className="bg-blue-500 p-2 rounded-lg mr-3">
+                      <BookOpen className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-semibold group-hover:text-blue-300 transition-colors">
+                        Official Documentation
+                      </h3>
+                      <p className="text-gray-300 text-sm">
+                        Read the official {selectedLanguage} docs
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Call to Action */}
           <div className="text-center mt-16">
             <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-white mb-4">Ready to Start Your Journey?</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Ready to Practice?</h3>
               <p className="text-gray-300 mb-6">
-                Test your knowledge with our AI-generated quizzes and track your progress as you follow this roadmap.
+                Test your knowledge with our AI-generated quizzes and track your progress.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -231,28 +245,27 @@ const Roadmap = () => {
         <div className="text-center mb-16">
           <div className="flex justify-center mb-8">
             <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-full border border-purple-500/30">
-              <Map className="w-12 h-12 text-purple-400" />
+              <BookOpen className="w-12 h-12 text-purple-400" />
             </div>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-            Learning Roadmaps
+            Programming Library
           </h1>
           
           <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Get personalized, AI-generated learning roadmaps for any programming language. 
-            Follow structured paths from beginner to expert level.
+            Access comprehensive AI-generated notes, theory explanations, and code examples 
+            for popular programming languages.
           </p>
           
           {!isSignedIn && (
             <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/30 max-w-md mx-auto">
-              <p className="text-purple-300 mb-4">Sign in to access personalized roadmaps</p>
+              <p className="text-purple-300 mb-4">Sign in to access the programming library</p>
               <Link
                 to="/sign-up"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 inline-flex items-center"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
               >
                 Get Started
-                <ChevronRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
           )}
@@ -261,21 +274,21 @@ const Roadmap = () => {
         {/* Features */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
-            <div className="text-4xl mb-4">🎯</div>
-            <h3 className="text-xl font-bold text-white mb-2">Personalized Paths</h3>
-            <p className="text-gray-300">AI-generated roadmaps tailored to your learning goals and current skill level</p>
-          </div>
-          
-          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
             <div className="text-4xl mb-4">📚</div>
-            <h3 className="text-xl font-bold text-white mb-2">Structured Learning</h3>
-            <p className="text-gray-300">Step-by-step progression from beginner concepts to advanced techniques</p>
+            <h3 className="text-xl font-bold text-white mb-2">Comprehensive Theory</h3>
+            <p className="text-gray-300">Detailed explanations of programming concepts and principles</p>
           </div>
           
           <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
-            <div className="text-4xl mb-4">⚡</div>
-            <h3 className="text-xl font-bold text-white mb-2">Real-time Updates</h3>
-            <p className="text-gray-300">Roadmaps updated with the latest industry trends and best practices</p>
+            <div className="text-4xl mb-4">💻</div>
+            <h3 className="text-xl font-bold text-white mb-2">Code Examples</h3>
+            <p className="text-gray-300">Practical code samples with copy-to-clipboard functionality</p>
+          </div>
+          
+          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
+            <div className="text-4xl mb-4">🎥</div>
+            <h3 className="text-xl font-bold text-white mb-2">Learning Resources</h3>
+            <p className="text-gray-300">Curated YouTube tutorials and official documentation links</p>
           </div>
         </div>
 
@@ -324,9 +337,9 @@ const Roadmap = () => {
         {!isSignedIn && (
           <div className="text-center mt-16">
             <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-white mb-4">Start Your Learning Journey</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Unlock Your Learning Potential</h3>
               <p className="text-gray-300 mb-6">
-                Join thousands of developers who are advancing their careers with our AI-powered learning platform.
+                Join thousands of developers who are advancing their skills with our comprehensive programming library.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -350,4 +363,4 @@ const Roadmap = () => {
   )
 }
 
-export default Roadmap
+export default Library

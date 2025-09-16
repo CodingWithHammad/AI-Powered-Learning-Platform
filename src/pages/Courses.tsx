@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'
 import { Play, Award, Clock, ChevronRight } from 'lucide-react'
@@ -76,10 +76,10 @@ const Courses = () => {
 
   const handleLanguageClick = async (language: string) => {
     if (!isSignedIn) return
-    
+
     setIsLoading(true)
     setSelectedLanguage(language)
-    
+
     try {
       const quiz = await generateQuiz(language)
       setQuizData(quiz)
@@ -115,16 +115,16 @@ const Courses = () => {
               <Play className="w-12 h-12 text-purple-400" />
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
             AI-Powered Courses
           </h1>
-          
+
           <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Challenge yourself with dynamically generated quizzes for 10 popular programming languages. 
+            Challenge yourself with dynamically generated quizzes for 10 popular programming languages.
             Each quiz is unique and tailored to test your knowledge comprehensively.
           </p>
-          
+
           {!isSignedIn && (
             <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/30 max-w-md mx-auto">
               <p className="text-purple-300 mb-4">Ready to start learning?</p>
@@ -146,13 +146,13 @@ const Courses = () => {
             <h3 className="text-2xl font-bold text-white mb-2">10 Questions</h3>
             <p className="text-gray-300">Per quiz session</p>
           </div>
-          
+
           <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
             <Clock className="w-12 h-12 text-purple-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">~15 Minutes</h3>
             <p className="text-gray-300">Average completion time</p>
           </div>
-          
+
           <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 text-center">
             <Play className="w-12 h-12 text-purple-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Unlimited</h3>
@@ -179,9 +179,8 @@ const Courses = () => {
                 key={language.name}
                 onClick={() => handleLanguageClick(language.name)}
                 disabled={!isSignedIn}
-                className={`group relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${
-                  !isSignedIn ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-                }`}
+                className={`group relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${!isSignedIn ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+                  }`}
               >
                 <div className="text-center">
                   <div className="bg-white/10 w-16 h-16 rounded-lg p-3 mx-auto mb-4 group-hover:bg-white/20 transition-colors">
@@ -203,11 +202,11 @@ const Courses = () => {
                     {language.description}
                   </p>
                 </div>
-                
+
                 {isSignedIn && (
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300"></div>
                 )}
-                
+
                 {!isSignedIn && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-purple-300 font-medium">Sign in required</span>

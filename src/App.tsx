@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import Courses from './pages/Courses'
 import Roadmap from './pages/Roadmap'
 import Score from './pages/Score'
+import ChatBot from './pages/ChatBot'
+import Library from './pages/Library'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || 'pk_test_your-clerk-key-here'
 
@@ -22,30 +24,30 @@ function App() {
           <Routes>
             <Route path="/sign-in/*" element={
               <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-                <SignIn 
+                <SignIn
                   appearance={{
                     elements: {
                       rootBox: "mx-auto",
                       card: "bg-black/40 backdrop-blur-md border border-purple-500/20"
                     }
                   }}
-                  routing="path" 
-                  path="/sign-in" 
+                  routing="path"
+                  path="/sign-in"
                   redirectUrl="/courses"
                 />
               </div>
             } />
             <Route path="/sign-up/*" element={
               <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-                <SignUp 
+                <SignUp
                   appearance={{
                     elements: {
                       rootBox: "mx-auto",
                       card: "bg-black/40 backdrop-blur-md border border-purple-500/20"
                     }
                   }}
-                  routing="path" 
-                  path="/sign-up" 
+                  routing="path"
+                  path="/sign-up"
                   redirectUrl="/courses"
                 />
               </div>
@@ -57,6 +59,8 @@ function App() {
               <Route path="courses" element={<Courses />} />
               <Route path="roadmap" element={<Roadmap />} />
               <Route path="score" element={<Score />} />
+              <Route path="chatbot" element={<ChatBot />} />
+              <Route path="library" element={<Library />} />
             </Route>
           </Routes>
         </div>

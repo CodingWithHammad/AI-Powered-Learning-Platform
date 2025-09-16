@@ -1,7 +1,6 @@
-import React from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { UserButton, useAuth } from '@clerk/clerk-react'
-import { Code, Home, User, Mail, Trophy, BookOpen, Map } from 'lucide-react'
+import { Code, Home, User, Mail, Trophy, BookOpen, Map, ChefHatIcon, Library } from 'lucide-react'
 
 const Layout = () => {
   const location = useLocation()
@@ -14,6 +13,8 @@ const Layout = () => {
     { path: '/courses', label: 'Courses', icon: BookOpen },
     { path: '/roadmap', label: 'Roadmap', icon: Map },
     { path: '/score', label: 'Scores', icon: Trophy },
+    { path: '/chatbot', label: 'Chatbot', icon: ChefHatIcon },
+    { path: '/library', label: 'Library', icon: Library },
   ]
 
   return (
@@ -27,17 +28,16 @@ const Layout = () => {
                 LearnAI
               </span>
             </Link>
-            
+
             <nav className="hidden md:flex items-center space-x-8">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <Link
                   key={path}
                   to={path}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
-                    location.pathname === path
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${location.pathname === path
                       ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
                       : 'text-gray-300 hover:text-purple-300 hover:bg-purple-500/10'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{label}</span>
@@ -87,7 +87,7 @@ const Layout = () => {
                 Master programming languages with AI-powered quizzes and personalized learning roadmaps.
               </p>
             </div>
-            
+
             <div>
               <h3 className="text-white font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
@@ -100,7 +100,7 @@ const Layout = () => {
                 ))}
               </ul>
             </div>
-            
+
             <div>
               <h3 className="text-white font-semibold mb-4">Learning</h3>
               <ul className="space-y-2">
@@ -114,7 +114,7 @@ const Layout = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-purple-500/20 mt-8 pt-8 text-center">
             <p className="text-gray-400">
               © 2025 LearnAI. All rights reserved. Powered by AI.

@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(API_KEY)
 
 export const generateQuiz = async (programmingLanguage: string) => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
     
     const prompt = `Generate a quiz about ${programmingLanguage} programming language with exactly 10 questions. 
     Format the response as a JSON object with the following structure:
@@ -49,7 +49,7 @@ export const generateQuiz = async (programmingLanguage: string) => {
 
 export const generateRoadmap = async (programmingLanguage: string) => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
     
     const prompt = `Create a comprehensive learning roadmap for ${programmingLanguage} programming language.
     Format the response as a JSON object representing a tree structure:
@@ -95,6 +95,56 @@ export const generateRoadmap = async (programmingLanguage: string) => {
               subtopics: ['Installation', 'Basic Syntax', 'Hello World']
             }
           ]
+        }
+      ]
+    }
+  }
+}
+
+export const generateLibraryNotes = async (programmingLanguage: string) => {
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+    
+    const prompt = `Generate comprehensive programming notes for ${programmingLanguage}. 
+    Format the response as a JSON object with the following structure:
+    {
+      "theory": "Detailed explanation of the language, its features, use cases, and core concepts",
+      "codeExamples": [
+        {
+          "title": "Example title",
+          "description": "Brief description of what this code does",
+          "code": "Complete, runnable code example"
+        }
+      ]
+    }
+    
+    Include at least 5-7 practical code examples covering:
+    - Basic syntax and variables
+    - Functions/methods
+    - Data structures (arrays, objects, etc.)
+    - Control flow (loops, conditionals)
+    - Error handling
+    - A practical mini-project example
+    
+    Make the theory section comprehensive but accessible, covering the language's history, 
+    key features, advantages, common use cases, and fundamental concepts.`
+
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    const text = response.text()
+    
+    const cleanText = text.replace(/```json\n?|\n?```/g, '').trim()
+    console.log('Library Notes Response:', cleanText)
+    return JSON.parse(cleanText)
+  } catch (error) {
+    console.error('Error generating library notes:', error)
+    return {
+      theory: `${programmingLanguage} is a powerful programming language with many applications in software development. It offers a rich set of features and is widely used in the industry for various types of projects.`,
+      codeExamples: [
+        {
+          title: 'Hello World',
+          description: 'A simple program that displays "Hello, World!"',
+          code: `// Hello World example\nconsole.log("Hello, World!");`
         }
       ]
     }
