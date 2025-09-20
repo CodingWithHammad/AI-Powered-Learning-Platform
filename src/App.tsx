@@ -28,7 +28,7 @@ function App() {
                   appearance={{
                     elements: {
                       rootBox: "mx-auto",
-                      card: "backdrop-blur-md border border-purple-500/20"
+                      card: "bg-black/40 backdrop-blur-md border border-purple-500/20"
                     }
                   }}
                   routing="path"
@@ -43,7 +43,7 @@ function App() {
                   appearance={{
                     elements: {
                       rootBox: "mx-auto",
-                      card: "backdrop-blur-md border border-purple-500/20"
+                      card: "bg-black/40 backdrop-blur-md border border-purple-500/20"
                     }
                   }}
                   routing="path"
