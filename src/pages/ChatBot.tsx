@@ -12,7 +12,7 @@ interface Message {
 }
 
 const ChatBot = () => {
-  const { isSignedIn, user } = useAuth()
+  const { isSignedIn } = useAuth()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -31,13 +31,13 @@ const ChatBot = () => {
       // Add welcome message
       const welcomeMessage: Message = {
         id: Date.now().toString(),
-        content: `Hello ${user?.firstName || 'there'}! 👋 I'm your AI programming assistant. I can help you with coding questions, explain programming concepts, debug issues, and provide learning guidance. What would you like to know?`,
+        content: `Hello! 👋 I'm your AI programming assistant. I can help you with coding questions, explain programming concepts, debug issues, and provide learning guidance. What would you like to know?`,
         isUser: false,
         timestamp: new Date()
       }
       setMessages([welcomeMessage])
     }
-  }, [isSignedIn, user])
+  }, [isSignedIn])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -58,7 +58,7 @@ const ChatBot = () => {
     setIsTyping(true)
 
     try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
       
       const prompt = `You are a helpful AI programming assistant. The user asked: "${userMessage.content}". 
       Please provide a helpful, accurate, and educational response. If it's about programming, include code examples when relevant. 
@@ -163,14 +163,14 @@ const ChatBot = () => {
 
       {/* Chat Messages */}
       <div className="flex-1 container mx-auto px-6 py-6 overflow-hidden">
-        <div className="h-full max-w-4xl mx-auto flex flex-col">
+        <div className="h-full max-w-full mx-auto flex flex-col">
           <div className="flex-1 overflow-y-auto space-y-4 mb-6">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex items-start max-w-[80%] ${message.isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div className={`flex items-start max-w-[90%] ${message.isUser ? 'flex-row-reverse' : 'flex-row'}`}>
                   <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
                     message.isUser 
                       ? 'bg-gradient-to-r from-purple-500 to-pink-500 ml-3' 
