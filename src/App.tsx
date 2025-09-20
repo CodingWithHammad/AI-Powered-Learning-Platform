@@ -28,6 +28,7 @@ function App() {
                   appearance={{
                     elements: {
                       rootBox: "mx-auto",
+                      card: "backdrop-blur-md border border-purple-500/20"
                     }
                   }}
                   routing="path"
@@ -41,7 +42,8 @@ function App() {
                 <SignUp
                   appearance={{
                     elements: {
-                      rootBox: "mx-auto"
+                      rootBox: "mx-auto",
+                      card: "backdrop-blur-md border border-purple-500/20"
                     }
                   }}
                   routing="path"
