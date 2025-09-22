@@ -11,6 +11,7 @@ import ChatBot from './pages/ChatBot'
 import Library from './pages/Library'
 import SignInPage from './pages/sign-in'
 import SignUpPage from './pages/sign-up'
+import VapiAgent from './pages/VapiAgent'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || 'pk_test_your-clerk-key-here'
 
@@ -43,6 +44,7 @@ function App() {
               <Route path="score" element={<Score />} />
               <Route path="chatbot" element={<ChatBot />} />
               <Route path="library" element={<Library />} />
+              <Route path="voice-agent" element={<VapiAgent />} />
             </Route>
           </Routes>
         </div>

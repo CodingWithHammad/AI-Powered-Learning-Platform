@@ -1,36 +1,7 @@
-import React from 'react'
-import { Brain, Target, Users, Award, Zap, Code } from 'lucide-react'
+import { Zap, Code } from 'lucide-react'
+import { features, stats } from '../constant/index'
 
 const About = () => {
-  const features = [
-    {
-      icon: Brain,
-      title: 'AI-Powered Learning',
-      description: 'Harness the power of Google\'s Gemini AI to generate unique, challenging questions and comprehensive learning roadmaps tailored to your skill level.'
-    },
-    {
-      icon: Target,
-      title: 'Personalized Experience',
-      description: 'Every learning journey is unique. Our platform adapts to your progress and provides personalized recommendations for improvement.'
-    },
-    {
-      icon: Users,
-      title: 'Community Driven',
-      description: 'Join thousands of learners worldwide. Compare scores, share achievements, and learn from the global programming community.'
-    },
-    {
-      icon: Award,
-      title: 'Progress Tracking',
-      description: 'Monitor your improvement over time with detailed analytics, score history, and comprehensive performance insights.'
-    }
-  ]
-
-  const stats = [
-    { number: '10+', label: 'Programming Languages' },
-    { number: '1000+', label: 'AI-Generated Questions' },
-    { number: '50+', label: 'Learning Paths' },
-    { number: '95%', label: 'Success Rate' }
-  ]
 
   return (
     <div className="min-h-screen">
@@ -42,13 +13,13 @@ const About = () => {
               <Code className="w-12 h-12 text-purple-400" />
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
             About LearnAI
           </h1>
-          
+
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Revolutionizing programming education through artificial intelligence, 
+            Revolutionizing programming education through artificial intelligence,
             personalized learning experiences, and adaptive content generation.
           </p>
         </div>
@@ -63,15 +34,15 @@ const About = () => {
                 Our Mission
               </h2>
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                We believe that learning programming should be accessible, engaging, and tailored to each individual's pace and style. 
+                We believe that learning programming should be accessible, engaging, and tailored to each individual's pace and style.
                 Our mission is to democratize coding education by leveraging cutting-edge AI technology to create personalized learning experiences.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Through our platform, we aim to bridge the gap between theoretical knowledge and practical application, 
+                Through our platform, we aim to bridge the gap between theoretical knowledge and practical application,
                 helping developers of all levels master new programming languages and advance their careers.
               </p>
             </div>
-            
+
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-purple-500/20">
               <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-xl mb-6">
                 <Zap className="w-12 h-12 text-purple-400 mx-auto" />
@@ -91,7 +62,7 @@ const About = () => {
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             What Makes Us Different
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {features.map(({ icon: Icon, title, description }, index) => (
               <div key={index} className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 group">
@@ -112,7 +83,7 @@ const About = () => {
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Platform Statistics
           </h2>
-          
+
           <div className="grid md:grid-cols-4 gap-8">
             {stats.map(({ number, label }, index) => (
               <div key={index} className="text-center">
@@ -135,12 +106,12 @@ const About = () => {
             The Future of Learning
           </h2>
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            We envision a world where anyone can master programming through personalized, AI-driven education. 
+            We envision a world where anyone can master programming through personalized, AI-driven education.
             Our platform represents the next evolution in coding education, combining the best of human expertise with artificial intelligence.
           </p>
           <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20">
             <p className="text-lg text-gray-300 italic">
-              "Learning to code shouldn't be a one-size-fits-all experience. Every developer's journey is unique, 
+              "Learning to code shouldn't be a one-size-fits-all experience. Every developer's journey is unique,
               and our AI ensures that each learning path is as individual as the person taking it."
             </p>
             <div className="mt-4 text-purple-400 font-semibold">- LearnAI Team</div>

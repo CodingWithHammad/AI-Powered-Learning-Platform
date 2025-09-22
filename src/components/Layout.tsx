@@ -1,18 +1,7 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { UserButton, useAuth } from '@clerk/clerk-react'
-import {
-  Code,
-  Home,
-  User,
-  Mail,
-  Trophy,
-  BookOpen,
-  Map,
-  ChefHatIcon,
-  Library,
-  Menu
-} from 'lucide-react'
-
+import { Code, Menu } from 'lucide-react'
+import { navItems } from '../constant/index'
 import {
   Sheet,
   SheetContent,
@@ -25,16 +14,7 @@ const Layout = () => {
   const location = useLocation()
   const { isSignedIn } = useAuth()
 
-  const navItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { path: '/about', label: 'About', icon: User },
-    { path: '/contact', label: 'Contact', icon: Mail },
-    { path: '/courses', label: 'Courses', icon: BookOpen },
-    { path: '/roadmap', label: 'Roadmap', icon: Map },
-    { path: '/score', label: 'Scores', icon: Trophy },
-    { path: '/chatbot', label: 'Chatbot', icon: ChefHatIcon },
-    { path: '/library', label: 'Library', icon: Library },
-  ]
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -56,11 +36,10 @@ const Layout = () => {
                 <Link
                   key={path}
                   to={path}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
-                    location.pathname === path
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${location.pathname === path
                       ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
                       : 'text-gray-300 hover:text-purple-300 hover:bg-purple-500/10'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{label}</span>
@@ -91,11 +70,10 @@ const Layout = () => {
                       <Link
                         key={path}
                         to={path}
-                        className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
-                          location.pathname === path
+                        className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${location.pathname === path
                             ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
                             : 'text-gray-300 hover:text-purple-300 hover:bg-purple-500/10'
-                        }`}
+                          }`}
                       >
                         <Icon className="w-4 h-4" />
                         <span>{label}</span>

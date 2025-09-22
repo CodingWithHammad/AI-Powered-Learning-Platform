@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Play, Award, Clock, ChevronRight } from 'lucide-react'
 import { generateQuiz } from '../lib/gemini'
 import Quiz from '../components/Quiz'
+import { languages } from '../constant/index'
 
 const Courses = () => {
   const { isSignedIn } = useAuth()
@@ -11,69 +12,7 @@ const Courses = () => {
   const [quizData, setQuizData] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const languages = [
-    {
-      name: 'JavaScript',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-      description: 'The language of the web',
-      color: 'from-yellow-400 to-orange-500'
-    },
-    {
-      name: 'Python',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-      description: 'Simple and powerful',
-      color: 'from-blue-400 to-green-500'
-    },
-    {
-      name: 'Java',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-      description: 'Write once, run anywhere',
-      color: 'from-red-500 to-orange-600'
-    },
-    {
-      name: 'C++',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
-      description: 'System programming powerhouse',
-      color: 'from-blue-600 to-purple-600'
-    },
-    {
-      name: 'C#',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
-      description: 'Microsoft\'s versatile language',
-      color: 'from-purple-500 to-indigo-600'
-    },
-    {
-      name: 'Go',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg',
-      description: 'Fast and efficient',
-      color: 'from-cyan-400 to-blue-500'
-    },
-    {
-      name: 'Rust',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg',
-      description: 'Safe systems programming',
-      color: 'from-orange-500 to-red-600'
-    },
-    {
-      name: 'PHP',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
-      description: 'Web development classic',
-      color: 'from-indigo-500 to-purple-600'
-    },
-    {
-      name: 'Swift',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg',
-      description: 'Apple\'s modern language',
-      color: 'from-orange-400 to-red-500'
-    },
-    {
-      name: 'Kotlin',
-      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg',
-      description: 'Modern Android development',
-      color: 'from-purple-400 to-pink-500'
-    }
-  ]
-
+ 
   const handleLanguageClick = async (language: string) => {
     if (!isSignedIn) return
 

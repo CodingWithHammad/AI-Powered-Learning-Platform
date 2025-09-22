@@ -2,55 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, Target, Brain, CheckCircle, ChevronDown } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react'
+import { faqs, workflowSteps } from '../constant/index'
 
 const Home = () => {
-  const { isSignedIn } = useAuth()
-  
+  const { isSignedIn } = useAuth()  
   const [openFAQ, setOpenFAQ] = React.useState<number | null>(null)
-
-  const workflowSteps = [
-    {
-      step: 1,
-      title: 'Choose Your Language',
-      description: 'Select from 10 popular programming languages',
-      icon: Target
-    },
-    {
-      step: 2,
-      title: 'Take AI-Generated Quiz',
-      description: 'Answer 10 unique questions powered by AI',
-      icon: Brain
-    },
-    {
-      step: 3,
-      title: 'Review & Learn',
-      description: 'Get detailed explanations and track your progress',
-      icon: CheckCircle
-    }
-  ]
-
-  const faqs = [
-    {
-      question: 'How are the quiz questions generated?',
-      answer: 'Our platform uses Google\'s Gemini AI to generate unique, challenging questions for each programming language, ensuring a fresh experience every time.'
-    },
-    {
-      question: 'Can I retake quizzes?',
-      answer: 'Yes! You can take quizzes as many times as you want. Each attempt generates new questions, so you\'ll always have fresh challenges.'
-    },
-    {
-      question: 'What programming languages are supported?',
-      answer: 'We support 10 popular languages: JavaScript, Python, Java, C++, C#, Go, Rust, PHP, Swift, and Kotlin.'
-    },
-    {
-      question: 'How are learning roadmaps created?',
-      answer: 'Our AI analyzes current industry standards and best practices to create personalized, step-by-step learning paths for each programming language.'
-    },
-    {
-      question: 'Is the platform free to use?',
-      answer: 'Yes! All core features including quizzes, roadmaps, and progress tracking are completely free.'
-    }
-  ]
 
   return (
     <div className="min-h-screen">
