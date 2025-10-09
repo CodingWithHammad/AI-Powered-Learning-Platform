@@ -55,7 +55,7 @@ const Library = () => {
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-400 border-t-transparent"></div>
           </div>
           <h2 className="text-2xl font-bold text-white mb-4">Generating Notes...</h2>
-          <p className="text-gray-300">Our AI is creating comprehensive notes for {selectedLanguage}</p>
+          <p className="text-gray-300">Our AI is creating comprehensive notes for your {selectedLanguage}</p>
         </div>
       </div>
     )
