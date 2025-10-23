@@ -42,9 +42,9 @@ function App() {
               <Route path="courses" element={<Courses />} />
               <Route path="roadmap" element={<Roadmap />} />
               <Route path="score" element={<Score />} />
-              {/* <Route path="chatbot" element={<ChatBot />} />
+              <Route path="chatbot" element={<ChatBot />} />
               <Route path="library" element={<Library />} />
-              <Route path="voice-agent" element={<VapiAgent />} /> */}
+              <Route path="voice-agent" element={<VapiAgent />} />
             </Route>
           </Routes>
         </div>
