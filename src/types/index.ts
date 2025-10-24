@@ -8,5 +8,5 @@ export interface Project {
   html: string
   css: string
   javascript: string
-  testing: string
+
 }
