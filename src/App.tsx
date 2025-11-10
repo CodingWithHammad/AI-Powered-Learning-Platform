@@ -52,5 +52,4 @@ function App() {
     </ClerkProvider>
   )
 }
-
 export default App
