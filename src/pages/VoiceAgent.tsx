@@ -21,7 +21,6 @@ const VapiAgent = () => {
   const transcriptEndRef = useRef<HTMLDivElement>(null)
 
   // Note: This is a demo implementation. In a real app, you would integrate with Vapi's actual SDK
-  const VAPI_API_KEY = import.meta.env.VITE_VAPI_API_KEY || 'your-vapi-api-key'
 
   useEffect(() => {
     scrollToBottom()
@@ -316,4 +315,4 @@ const VapiAgent = () => {
   )
 }
 
-export default VapiAgent
+export default VapiAgent;
