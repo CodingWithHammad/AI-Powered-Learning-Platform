@@ -2,7 +2,6 @@ import { Zap, Code } from 'lucide-react'
 import { features, stats } from '../constant/index'
 
 const About = () => {
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
