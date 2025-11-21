@@ -16,7 +16,6 @@ const Quiz: React.FC<QuizProps> = ({ language, quizData, onComplete }) => {
   const [showResults, setShowResults] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState(900) // 15 minutes in seconds
   const [quizStarted, setQuizStarted] = useState(false)
-
   const questions = quizData?.questions || []
   const totalQuestions = questions.length
 

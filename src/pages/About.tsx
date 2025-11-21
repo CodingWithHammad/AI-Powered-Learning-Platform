@@ -12,11 +12,9 @@ const About = () => {
               <Code className="w-12 h-12 text-purple-400" />
             </div>
           </div>
-
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
             About LearnAI
           </h1>
-
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
             Revolutionizing programming education through artificial intelligence,
             personalized learning experiences, and adaptive content generation.
