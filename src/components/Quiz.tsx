@@ -28,6 +28,7 @@ const Quiz: React.FC<QuizProps> = ({ language, quizData, onComplete }) => {
     } else if (timeRemaining === 0) {
       handleFinishQuiz()
     }
+
   }, [quizStarted, timeRemaining, showResults])
 
   const handleStartQuiz = () => {
@@ -55,6 +56,7 @@ const Quiz: React.FC<QuizProps> = ({ language, quizData, onComplete }) => {
       return acc + (answer === questions[index]?.correctAnswer ? 1 : 0)
     }, 0)
 
+    
     // Save quiz results to database
     if (user) {
       try {
