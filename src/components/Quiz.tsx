@@ -56,6 +56,8 @@ const Quiz: React.FC<QuizProps> = ({ language, quizData, onComplete }) => {
       return acc + (answer === questions[index]?.correctAnswer ? 1 : 0)
     }, 0)
     
+
+    
     // Save quiz results to database
     if (user) {
       try {
