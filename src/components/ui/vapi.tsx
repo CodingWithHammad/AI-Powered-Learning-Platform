@@ -24,21 +24,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Mic, MicOff, Phone, PhoneOff } from "lucide-react";
 
 interface VapiControlsProps {
