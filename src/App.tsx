@@ -20,7 +20,6 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key')
 }
 
-
 function App() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
