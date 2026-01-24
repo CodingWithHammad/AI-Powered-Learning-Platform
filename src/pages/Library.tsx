@@ -60,7 +60,6 @@ const Library = () => {
       </div>
     )
   }
-
   if (selectedLanguage && notesData) {
     return (
       <div className="min-h-screen">
