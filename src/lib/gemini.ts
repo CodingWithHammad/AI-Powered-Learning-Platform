@@ -6,28 +6,51 @@ const genAI = new GoogleGenerativeAI(API_KEY)
 export const generateQuiz = async (programmingLanguage: string) => {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-    
-    const prompt = `Generate a quiz about ${programmingLanguage} programming language with exactly 10 questions. 
-    Format the response as a JSON object with the following structure:
+
+    const prompt = `
+Generate a quiz about ${programmingLanguage} programming language with EXACTLY 10 questions.
+
+⚠️ VERY IMPORTANT RULES:
+1. At least **6 out of 10 questions MUST include a code snippet**.
+2. Code snippets MUST be inside Markdown triple backticks with correct language tagging.
+3. Code-based questions should ask about:
+   - Output of the code
+   - Errors in the code
+   - Best practice improvements
+   - Concept demonstrated by the code
+4. Do NOT explain the code inside the question text.
+
+Return ONLY valid JSON. Do NOT include any extra text, markdown explanations, or commentary.
+
+JSON FORMAT (STRICT):
+{
+  "questions": [
     {
-      "questions": [
-        {
-          "question": "Question text here",
-          "options": ["Option A", "Option B", "Option C", "Option D"],
-          "correctAnswer": 0,
-          "explanation": "Brief explanation of the correct answer"
-        }
-      ]
+      "question": "Question text here (include code if required)",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "correctAnswer": 0,
+      "explanation": "Brief explanation of why this option is correct"
     }
-    
-    Make sure the questions cover various aspects like syntax, concepts, best practices, and common patterns in ${programmingLanguage}.
-    Each question should have exactly 4 options and the correctAnswer should be the index (0-3) of the correct option.
-    Make the questions moderately challenging and educational.`
+  ]
+}
+
+EXAMPLE QUESTION FORMAT (follow this style):
+
+{
+  "question": "What will be the output of the following ${programmingLanguage} code?\\n\\n\`\`\`${programmingLanguage}\\n<code here>\\n\`\`\`",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correctAnswer": 1,
+  "explanation": "Short and clear explanation"
+}
+
+Make the questions moderately challenging and educational.
+`;
+
 
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
-    
+
     // Clean up the response to ensure it's valid JSON
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim()
     return JSON.parse(cleanText)
@@ -50,7 +73,7 @@ export const generateQuiz = async (programmingLanguage: string) => {
 export const generateRoadmap = async (programmingLanguage: string) => {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-    
+
     const prompt = `Create a comprehensive learning roadmap for ${programmingLanguage} programming language.
     Format the response as a JSON object representing a tree structure:
     {
@@ -77,7 +100,7 @@ export const generateRoadmap = async (programmingLanguage: string) => {
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
-    
+
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim()
     return JSON.parse(cleanText)
   } catch (error) {
@@ -104,7 +127,7 @@ export const generateRoadmap = async (programmingLanguage: string) => {
 export const generateLibraryNotes = async (programmingLanguage: string) => {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-    
+
     const prompt = `Generate comprehensive programming notes for ${programmingLanguage}. 
     Format the response as a JSON object with the following structure:
     {
@@ -132,7 +155,7 @@ export const generateLibraryNotes = async (programmingLanguage: string) => {
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
-    
+
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim()
     console.log('Library Notes Response:', cleanText)
     return JSON.parse(cleanText)
