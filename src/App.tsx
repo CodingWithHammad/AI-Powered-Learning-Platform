@@ -14,7 +14,6 @@ import SignUpPage from './pages/sign-up'
 import VapiAgent from './pages/VapiAgent'
 import VoiceAgent from './pages/VoiceAgent'
 
-
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || 'pk_test_your-clerk-key-here'
 
 if (!PUBLISHABLE_KEY) {
