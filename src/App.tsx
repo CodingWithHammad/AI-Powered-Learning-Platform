@@ -52,6 +52,6 @@ function App() {
       </Router>
     </ClerkProvider>
   )
-}
 
+}
 export default App
