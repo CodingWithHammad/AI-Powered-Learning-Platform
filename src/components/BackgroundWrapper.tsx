@@ -1,12 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import LightPillar from "./components/LightPillar";
+import LightPillar from "@/components/LightPillar";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-      <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+interface Props {
+  children: React.ReactNode;
+}
+
+const BackgroundWrapper: React.FC<Props> = ({ children }) => {
+  return (
+    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
       
       {/* Background */}
       <LightPillar
@@ -23,12 +24,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         mixBlendMode="screen"
         quality="high"
       />
-       <div style={{ position: "absolute", inset: 0 }}>
-          <App />
-        
+
+      {/* Content */}
+      <div style={{ position: "absolute", inset: 0 }}>
+        {children}
       </div>
 
     </div>
+  );
+};
 
-  </React.StrictMode>
-);
+export default BackgroundWrapper;

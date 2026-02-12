@@ -3,12 +3,30 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, Target, Brain, CheckCircle, ChevronDown } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react'
 import { faqs, workflowSteps } from '../constant/index'
+import LightPillar from '@/components/LightPillar'
 
 const Home = () => {
   const { isSignedIn } = useAuth()  
   const [openFAQ, setOpenFAQ] = React.useState<number | null>(null)
 
   return (
+    <div className="relative min-h-screen overflow-hidden">
+
+      {/* Background Light Pillar */}
+      <LightPillar
+        topColor="#5227FF"
+        bottomColor="#FF9FFC"
+        intensity={1}
+        rotationSpeed={0.3}
+        glowAmount={0.002}
+        pillarWidth={3}
+        pillarHeight={0.4}
+        noiseIntensity={0.5}
+        pillarRotation={25}
+        interactive={false}
+        mixBlendMode="screen"
+        quality="high"
+      />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20">
@@ -148,6 +166,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+     </div>
     </div>
   )
 }
