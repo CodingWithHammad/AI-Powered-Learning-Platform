@@ -22,7 +22,6 @@ if (!PUBLISHABLE_KEY) {
 function App() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <Router>
         <div className="App">
           <Routes>
             <Route path="/sign-in/*" element={
@@ -49,7 +48,6 @@ function App() {
             </Route>
           </Routes>
         </div>
-      </Router>
     </ClerkProvider>
   )
 

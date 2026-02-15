@@ -2,33 +2,36 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import LightPillar from "./components/LightPillar";
+import { BrowserRouter } from "react-router-dom";
+import FloatingLines from "@/components/FloatingLines";
+
+
+const RootLayout = () => {
+  return (
+    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+      
+      {/* Background Animation */}
+      <FloatingLines
+        enabledWaves={["top", "middle", "bottom"]}
+        lineCount={5}
+        lineDistance={5}
+        bendRadius={5}
+        bendStrength={-0.5}
+        interactive={true}
+        parallax={true}
+      />
+
+      {/* Main App Content */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+
+    </div>
+  );
+};
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-      <div style={{ width: "100%", height: "100vh", position: "relative" }}>
-      
-      {/* Background */}
-      <LightPillar
-        topColor="#5227FF"
-        bottomColor="#FF9FFC"
-        intensity={1}
-        rotationSpeed={0.3}
-        glowAmount={0.002}
-        pillarWidth={3}
-        pillarHeight={0.4}
-        noiseIntensity={0.5}
-        pillarRotation={25}
-        interactive={false}
-        mixBlendMode="screen"
-        quality="high"
-      />
-       <div style={{ position: "absolute", inset: 0 }}>
-          <App />
-        
-      </div>
-
-    </div>
-
+    <RootLayout />
   </React.StrictMode>
 );
