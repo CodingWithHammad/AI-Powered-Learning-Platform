@@ -3,15 +3,48 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, Target, Brain, CheckCircle, ChevronDown } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react'
 import { faqs, workflowSteps } from '../constant/index'
+import Lightning from '../components/Lightning'   // ⚡ Import Lightning
+import Hero from '@/components/landing/Hero'
+import Features from '@/components/landing/Features'
+import HowItWorks from '@/components/landing/HowItWorks'
+import FAQ from '@/components/landing/FAQ'
+import Footer from '@/components/landing/Footer'
 
 const Home = () => {
   const { isSignedIn } = useAuth()
   const [openFAQ, setOpenFAQ] = React.useState<number | null>(null)
 
   return (
-      <div className="min-h-screen">
+    <div className="relative min-h-screen bg-black text-white">
+
+      {/* ⚡ Background Effects */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+        {/* Lightning */}
+        <div className="absolute inset-0">
+          <Lightning
+            hue={266}
+            xOffset={-0.1}
+            speed={1.2}
+            intensity={1}
+            size={1}
+          />
+        </div>
+
+        {/* Glow */}
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+      </div>
+
+      {/* ⭐ Main Content */}
+      <div className="relative z-10">
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <FAQ />
+        <Footer />
         {/* Hero Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center mb-8">
               <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-full border border-purple-500/30">
@@ -44,10 +77,9 @@ const Home = () => {
               </Link>
             </div>
           </div>
-        </section>
-
+        </section> */}
         {/* About Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Why Choose LearnAI?
@@ -85,10 +117,10 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Workflow Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               How It Works
@@ -118,10 +150,10 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ Section */}
-        <section className="container mx-auto px-6 py-20">
+        {/* <section className="container mx-auto px-6 py-20">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Frequently Asked Questions
@@ -147,9 +179,28 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
+    </div>
   )
 }
 
 export default Home
+
+  //  <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+  //       {/* Lightning */}
+  //       <div className="absolute inset-0">
+  //         <Lightning
+  //           hue={266}
+  //           xOffset={-0.1}
+  //           speed={1.2}
+  //           intensity={1}
+  //           size={1}
+  //         />
+  //       </div>
+
+  //       {/* Glow */}
+  //       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+  //       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+  //     </div>
