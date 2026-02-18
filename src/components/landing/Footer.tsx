@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-[10px] font-bold text-zinc-300 uppercase tracking-[0.4em] mb-8">Platform</h4>
           <ul className="space-y-4 text-sm text-zinc-500 font-light">
-            <li><a href="#" className="hover:text-purple-400 transition-colors">Courses</a></li>
+            <li><a href="#" className="hover:text-purple-400 transition-colors">Quizzes</a></li>
             <li><a href="#" className="hover:text-purple-400 transition-colors">Workshops</a></li>
             <li><a href="#" className="hover:text-purple-400 transition-colors">Podcast</a></li>
             <li><a href="#" className="hover:text-purple-400 transition-colors">Mentors</a></li>

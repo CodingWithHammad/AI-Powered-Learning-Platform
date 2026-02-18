@@ -3,6 +3,7 @@ import { useAuth } from '@clerk/clerk-react'
 import { CheckCircle, XCircle, ArrowRight, RotateCcw, Trophy, Clock } from 'lucide-react'
 import { supabase, QuizScore } from '../lib/supabase'
 
+
 interface QuizProps {
   language: string
   quizData: any

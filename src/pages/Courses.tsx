@@ -77,7 +77,7 @@ const Courses = () => {
           <h2 className="text-6xl md:text-7xl font-black uppercase tracking-tighter">
             AI-Powered{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500">
-              Courses
+              Quizzes
             </span>
           </h2>
 
