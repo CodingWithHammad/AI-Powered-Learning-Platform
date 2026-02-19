@@ -3,7 +3,7 @@ import Lightning from "@/components/Lightning";
 
 const VoiceAssistant: React.FC = () => {
   return (
-    <section className="py-32 px-6 lg:px-24 bg-[#020202] relative overflow-hidden border-t border-white/5">
+    <section className="py-8 px-6 lg:px-24 bg-[#020202] relative overflow-hidden border-t border-white/5">
 
       {/* ================= LIGHTNING BACKGROUND ================= */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
