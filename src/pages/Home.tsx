@@ -186,21 +186,3 @@ const Home = () => {
 }
 
 export default Home
-
-  //  <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-
-  //       {/* Lightning */}
-  //       <div className="absolute inset-0">
-  //         <Lightning
-  //           hue={266}
-  //           xOffset={-0.1}
-  //           speed={1.2}
-  //           intensity={1}
-  //           size={1}
-  //         />
-  //       </div>
-
-  //       {/* Glow */}
-  //       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
-  //       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
-  //     </div>
