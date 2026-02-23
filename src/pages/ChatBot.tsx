@@ -788,7 +788,247 @@
 
 
 
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
+// import { useAuth } from '@clerk/clerk-react'
+// import { Link } from 'react-router-dom'
+// import { chatbotResponse } from '@/lib/gemini'
+// import MarkdownRenderer from '@/components/MarkdownRenderer'
+// import Lightning from '@/components/Lightning'
+
+// interface Message {
+//   role: 'user' | 'assistant'
+//   content: string
+//   time: string
+// }
+
+// const Chatbot: React.FC = () => {
+
+//   const { isSignedIn } = useAuth()
+
+//   const [messages, setMessages] = useState<Message[]>([
+//     {
+//       role: 'assistant',
+//       content:
+//         "Hello! 👋 I'm your AI programming assistant. Sign in to start asking coding questions.",
+//       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+//     }
+//   ])
+
+//   const [input, setInput] = useState('')
+//   const [loading, setLoading] = useState(false)
+
+//   const handleSendMessage = async () => {
+//     if (!input.trim()) return
+
+//     if (!isSignedIn) {
+//       setMessages((prev) => [
+//         ...prev,
+//         {
+//           role: 'assistant',
+//           content: "🔒 Please sign in to use the AI assistant.",
+//           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+//         }
+//       ])
+//       return
+//     }
+
+//     const userMessage: Message = {
+//       role: 'user',
+//       content: input.trim(),
+//       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+//     }
+
+//     setMessages((prev) => [...prev, userMessage])
+//     setInput('')
+//     setLoading(true)
+
+//     try {
+//       const aiReply = await chatbotResponse(input)
+
+//       const botMessage: Message = {
+//         role: 'assistant',
+//         content: aiReply,
+//         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+//       }
+
+//       setMessages((prev) => [...prev, botMessage])
+
+//     } catch {
+//       setMessages((prev) => [
+//         ...prev,
+//         {
+//           role: 'assistant',
+//           content: '⚠️ Something went wrong. Please try again.',
+//           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+//         }
+//       ])
+//     } finally {
+//       setLoading(false)
+//     }
+//   }
+
+//   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+//     if (e.key === 'Enter') {
+//       e.preventDefault()
+//       handleSendMessage()
+//     }
+//   }
+
+//   return (
+//     <section className="relative min-h-screen bg-black text-white overflow-hidden">
+
+//       {/* ⚡ Lightning Background */}
+//       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+//         <div className="absolute inset-0">
+//           <Lightning
+//             hue={266}
+//             xOffset={-0.1}
+//             speed={1.2}
+//             intensity={1}
+//             size={1}
+//           />
+//         </div>
+
+//         {/* Glow */}
+//         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//       </div>
+
+//       {/* ⭐ Content */}
+//       <div className="relative z-10 py-32 px-6 lg:px-24">
+
+//         <div className="max-w-7xl mx-auto">
+
+//           {/* Header */}
+//           <div className="text-center mb-16 space-y-4">
+//             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-300 to-white">
+//               AI Programming Assistant
+//             </h2>
+
+//             {!isSignedIn && (
+//               <div className="mt-4">
+//                 <Link
+//                   to="/sign-in"
+//                   className="bg-purple-600 hover:bg-purple-500 text-white px-6 py-2 text-sm uppercase font-bold"
+//                 >
+//                   Sign In To Chat
+//                 </Link>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Chat Box */}
+//           <div className="max-w-5xl mx-auto bg-[#080808]/80 backdrop-blur border border-white/10">
+
+//             {/* Messages */}
+//             <div className="p-8 space-y-8 max-h-[600px] overflow-y-auto custom-scrollbar">
+
+//               {messages.map((msg, index) => (
+//                 <div key={index} className={`${msg.role === 'user' ? 'text-right' : ''}`}>
+
+//                   <div className={`inline-block p-4 text-sm ${
+//                     msg.role === 'user'
+//                       ? 'bg-purple-600 text-white'
+//                       : 'bg-purple-600/5 border border-purple-500/20 text-white/80'
+//                   }`}>
+//                     {msg.role === 'assistant'
+//                       ? <MarkdownRenderer content={msg.content} />
+//                       : msg.content
+//                     }
+//                   </div>
+
+//                   <div className="text-[10px] text-white/20 mt-1">
+//                     {msg.time}
+//                   </div>
+
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="text-purple-400 animate-pulse text-sm">
+//                   thinking...
+//                 </div>
+//               )}
+
+//             </div>
+
+//             {/* Input */}
+//             <div className="p-6 border-t border-white/10">
+
+//               <div className="flex gap-4">
+
+//                 <input
+//                   type="text"
+//                   value={input}
+//                   onChange={(e) => setInput(e.target.value)}
+//                   onKeyDown={handleKeyPress}
+//                   disabled={!isSignedIn}
+//                   placeholder={
+//                     isSignedIn
+//                       ? "Ask programming question..."
+//                       : "Sign in required to chat..."
+//                   }
+//                   className="flex-grow bg-[#0a0a0a] border border-white/10 p-4 outline-none disabled:opacity-40"
+//                 />
+
+//                 <button
+//                   onClick={handleSendMessage}
+//                   disabled={loading || !isSignedIn}
+//                   className="bg-purple-600 px-6 disabled:opacity-40"
+//                 >
+//                   Send
+//                 </button>
+
+//               </div>
+
+//             </div>
+//           </div>
+
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
+// export default Chatbot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useRef, useEffect } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'
 import { chatbotResponse } from '@/lib/gemini'
@@ -804,6 +1044,7 @@ interface Message {
 const Chatbot: React.FC = () => {
 
   const { isSignedIn } = useAuth()
+  const bottomRef = useRef<HTMLDivElement | null>(null)
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -816,6 +1057,11 @@ const Chatbot: React.FC = () => {
 
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  // Auto scroll to bottom
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, loading])
 
   const handleSendMessage = async () => {
     if (!input.trim()) return
@@ -875,117 +1121,99 @@ const Chatbot: React.FC = () => {
   }
 
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden">
+    <section className="relative h-screen bg-black text-white overflow-hidden">
 
-      {/* ⚡ Lightning Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-
-        <div className="absolute inset-0">
-          <Lightning
-            hue={266}
-            xOffset={-0.1}
-            speed={1.2}
-            intensity={1}
-            size={1}
-          />
-        </div>
-
-        {/* Glow */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+      {/* Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Lightning hue={266} xOffset={-0.1} speed={1.2} intensity={1} size={1} />
       </div>
 
-      {/* ⭐ Content */}
-      <div className="relative z-10 py-32 px-6 lg:px-24">
+      {/* Main Chat Layout */}
+      <div className="relative z-10 flex flex-col h-full">
 
-        <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="px-4 md:px-8 py-4 border-b border-white/10 backdrop-blur bg-black/50">
+          <h2 className="text-lg md:text-2xl font-bold text-center">
+            AI Programming Assistant
+          </h2>
 
-          {/* Header */}
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-300 to-white">
-              AI Programming Assistant
-            </h2>
-
-            {!isSignedIn && (
-              <div className="mt-4">
-                <Link
-                  to="/sign-in"
-                  className="bg-purple-600 hover:bg-purple-500 text-white px-6 py-2 text-sm uppercase font-bold"
-                >
-                  Sign In To Chat
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Chat Box */}
-          <div className="max-w-5xl mx-auto bg-[#080808]/80 backdrop-blur border border-white/10">
-
-            {/* Messages */}
-            <div className="p-8 space-y-8 max-h-[600px] overflow-y-auto custom-scrollbar">
-
-              {messages.map((msg, index) => (
-                <div key={index} className={`${msg.role === 'user' ? 'text-right' : ''}`}>
-
-                  <div className={`inline-block p-4 text-sm ${
-                    msg.role === 'user'
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-purple-600/5 border border-purple-500/20 text-white/80'
-                  }`}>
-                    {msg.role === 'assistant'
-                      ? <MarkdownRenderer content={msg.content} />
-                      : msg.content
-                    }
-                  </div>
-
-                  <div className="text-[10px] text-white/20 mt-1">
-                    {msg.time}
-                  </div>
-
-                </div>
-              ))}
-
-              {loading && (
-                <div className="text-purple-400 animate-pulse text-sm">
-                  thinking...
-                </div>
-              )}
-
+          {!isSignedIn && (
+            <div className="text-center mt-2">
+              <Link
+                to="/sign-in"
+                className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-1 text-xs uppercase font-bold rounded"
+              >
+                Sign In To Chat
+              </Link>
             </div>
-
-            {/* Input */}
-            <div className="p-6 border-t border-white/10">
-
-              <div className="flex gap-4">
-
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyPress}
-                  disabled={!isSignedIn}
-                  placeholder={
-                    isSignedIn
-                      ? "Ask programming question..."
-                      : "Sign in required to chat..."
-                  }
-                  className="flex-grow bg-[#0a0a0a] border border-white/10 p-4 outline-none disabled:opacity-40"
-                />
-
-                <button
-                  onClick={handleSendMessage}
-                  disabled={loading || !isSignedIn}
-                  className="bg-purple-600 px-6 disabled:opacity-40"
-                >
-                  Send
-                </button>
-
-              </div>
-
-            </div>
-          </div>
-
+          )}
         </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-6">
+
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div
+                className={`max-w-[85%] md:max-w-[60%] p-3 md:p-4 text-sm rounded-xl ${
+                  msg.role === 'user'
+                    ? 'bg-purple-600 text-white rounded-br-none'
+                    : 'bg-[#111] border border-purple-500/20 text-white/80 rounded-bl-none'
+                }`}
+              >
+                {msg.role === 'assistant'
+                  ? <MarkdownRenderer content={msg.content} />
+                  : msg.content
+                }
+
+                <div className="text-[10px] text-white/30 mt-2 text-right">
+                  {msg.time}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {loading && (
+            <div className="text-purple-400 animate-pulse text-sm">
+              Thinking...
+            </div>
+          )}
+
+          <div ref={bottomRef}></div>
+        </div>
+
+        {/* Sticky Input */}
+        <div className="p-3 md:p-4 border-t border-white/10 bg-black/80 backdrop-blur">
+          <div className="flex gap-2">
+
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyPress}
+              disabled={!isSignedIn}
+              placeholder={
+                isSignedIn
+                  ? "Ask programming question..."
+                  : "Sign in required..."
+              }
+              className="flex-1 bg-[#0f0f0f] border border-white/10 p-3 rounded-lg outline-none text-sm disabled:opacity-40"
+            />
+
+            <button
+              onClick={handleSendMessage}
+              disabled={loading || !isSignedIn}
+              className="bg-purple-600 px-4 md:px-6 rounded-lg disabled:opacity-40 text-sm font-semibold"
+            >
+              Send
+            </button>
+
+          </div>
+        </div>
+
       </div>
     </section>
   )
