@@ -25,8 +25,8 @@ const Home = () => {
           <Lightning
             hue={266}
             xOffset={-0.1}
-            speed={1.2}
-            intensity={1}
+           speed={1.5}
+            intensity={2}
             size={1}
           />
         </div>

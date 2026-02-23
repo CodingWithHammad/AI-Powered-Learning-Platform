@@ -1,3 +1,129 @@
+// import React from "react"
+
+// const Contact: React.FC = () => {
+//   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+
+//     const form = e.currentTarget
+
+//     const name = (form.elements.namedItem("name") as HTMLInputElement).value
+//     const age = (form.elements.namedItem("age") as HTMLInputElement).value
+//     const email = (form.elements.namedItem("email") as HTMLInputElement).value
+//     const subject = (form.elements.namedItem("subject") as HTMLInputElement).value
+//     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value
+
+//     const mailSubject = encodeURIComponent(subject)
+
+//     const mailBody = encodeURIComponent(
+//       `Name: ${name}
+// Age: ${age}
+// Email: ${email}
+
+// Message:
+// ${message}`
+//     )
+
+//     window.location.href = `mailto:codingwithhammad786@gmail.com?subject=${mailSubject}&body=${mailBody}`
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-black text-white px-6 py-16">
+//       <div className="max-w-5xl mx-auto">
+        
+//         {/* Heading */}
+//         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+//           Contact <span className="text-purple-500">Me</span>
+//         </h2>
+
+//         {/* Form */}
+//         <form
+//           onSubmit={handleSubmit}
+//           className="grid grid-cols-1 md:grid-cols-2 gap-6"
+//         >
+//           <input
+//             name="name"
+//             type="text"
+//             placeholder="Your Name"
+//             required
+//             className="bg-black border border-white/20 p-4 rounded-lg focus:border-purple-500 outline-none transition"
+//           />
+
+//           <input
+//             name="age"
+//             type="text"
+//             placeholder="Your Age"
+//             required
+//             className="bg-black border border-white/20 p-4 rounded-lg focus:border-purple-500 outline-none transition"
+//           />
+
+//           <input
+//             name="email"
+//             type="email"
+//             placeholder="Your Email"
+//             required
+//             className="md:col-span-2 bg-black border border-white/20 p-4 rounded-lg focus:border-purple-500 outline-none transition"
+//           />
+
+//           <input
+//             name="subject"
+//             type="text"
+//             placeholder="Subject"
+//             required
+//             className="md:col-span-2 bg-black border border-white/20 p-4 rounded-lg focus:border-purple-500 outline-none transition"
+//           />
+
+//           <textarea
+//             name="message"
+//             rows={6}
+//             placeholder="Your Message"
+//             required
+//             className="md:col-span-2 bg-black border border-white/20 p-4 rounded-lg focus:border-purple-500 outline-none resize-none transition"
+//           />
+
+//           <button
+//             type="submit"
+//             className="md:col-span-2 bg-purple-600 hover:bg-purple-700 transition px-6 py-4 rounded-lg font-semibold text-lg"
+//           >
+//             Send Message
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default Contact
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React from 'react';
 import Lightning from '@/components/Lightning';
 
@@ -12,8 +138,8 @@ const Contact: React.FC = () => {
           <Lightning
             hue={266}
             xOffset={-0.1}
-            speed={1.2}
-            intensity={1}
+            speed={1.5}
+            intensity={2}
             size={1}
           />
         </div>
