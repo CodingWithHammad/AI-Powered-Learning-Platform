@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import {
@@ -102,13 +103,10 @@ const Quiz: React.FC<QuizProps> = ({
 
   const progress = ((currentQuestion + 1) / totalQuestions) * 100;
 
-  // ==================================================
-  // MAIN WRAPPER WITH NEW THEME + LIGHTNING
-  // ==================================================
   return (
     <section className="min-h-screen bg-[#020202] text-white relative overflow-hidden py-24 px-6">
 
-      {/* LIGHTNING BACKGROUND */}
+      {/* Lightning Background */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <Lightning hue={266} speed={1.2} intensity={1} size={1} />
       </div>
@@ -154,7 +152,6 @@ const Quiz: React.FC<QuizProps> = ({
 
               <p className="text-white/40 max-w-xl mx-auto">
                 You have 15 minutes to complete {totalQuestions} questions.
-                Choose the correct option for each.
               </p>
             </div>
 
@@ -170,13 +167,10 @@ const Quiz: React.FC<QuizProps> = ({
         {/* ================= QUIZ RUNNING ================= */}
         {quizStarted && !showResults && (
           <>
-            {/* Header */}
             <div className="flex justify-between items-center mb-10">
-              <div>
-                <h2 className="text-xl font-bold">
-                  Question {currentQuestion + 1} / {totalQuestions}
-                </h2>
-              </div>
+              <h2 className="text-xl font-bold">
+                Question {currentQuestion + 1} / {totalQuestions}
+              </h2>
 
               <div className="flex items-center gap-2 text-purple-400 font-mono">
                 <Clock size={18} />
@@ -184,7 +178,6 @@ const Quiz: React.FC<QuizProps> = ({
               </div>
             </div>
 
-            {/* Progress */}
             <div className="w-full bg-white/5 h-2 mb-10">
               <div
                 className="bg-purple-500 h-2 transition-all"
@@ -192,7 +185,6 @@ const Quiz: React.FC<QuizProps> = ({
               />
             </div>
 
-            {/* Question Card */}
             <div className="bg-[#080808] border border-white/10 p-10">
 
               <h3 className="text-2xl font-semibold mb-8">
@@ -234,7 +226,7 @@ const Quiz: React.FC<QuizProps> = ({
           </>
         )}
 
-        {/* ================= RESULTS ================= */}
+        {/* ================= RESULTS WITH EXPLANATION ================= */}
         {showResults && (
           <div className="text-center">
 
@@ -268,13 +260,14 @@ const Quiz: React.FC<QuizProps> = ({
                       )}
                     </div>
 
-                    {q.options.map(
-                      (opt: string, i: number) => (
+                    {/* Options */}
+                    <div className="mb-4">
+                      {q.options.map((opt: string, i: number) => (
                         <div
                           key={i}
                           className={`p-2 text-sm ${
                             i === q.correctAnswer
-                              ? "text-green-400"
+                              ? "text-green-400 font-semibold"
                               : i === userAnswer
                               ? "text-red-400"
                               : "text-white/50"
@@ -282,8 +275,18 @@ const Quiz: React.FC<QuizProps> = ({
                         >
                           {String.fromCharCode(65 + i)}. {opt}
                         </div>
-                      )
-                    )}
+                      ))}
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="mt-4 border-t border-white/10 pt-4">
+                      <p className="text-xs uppercase text-purple-400 mb-2">
+                        Explanation
+                      </p>
+                      <p className="text-sm text-white/70 leading-relaxed">
+                        {q.explanation || "No explanation provided."}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
@@ -313,6 +316,422 @@ const Quiz: React.FC<QuizProps> = ({
 };
 
 export default Quiz;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import { useAuth } from "@clerk/clerk-react";
+// import {
+//   CheckCircle,
+//   XCircle,
+//   ArrowRight,
+//   RotateCcw,
+//   Clock,
+// } from "lucide-react";
+// import { supabase, QuizScore } from "../lib/supabase";
+// import Lightning from "@/components/Lightning";
+
+// interface QuizProps {
+//   language: string;
+//   quizData: any;
+//   onComplete: () => void;
+// }
+
+// const Quiz: React.FC<QuizProps> = ({
+//   language,
+//   quizData,
+//   onComplete,
+// }) => {
+//   const { user } = useAuth();
+
+//   const [currentQuestion, setCurrentQuestion] = useState(0);
+//   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
+//   const [showResults, setShowResults] = useState(false);
+//   const [timeRemaining, setTimeRemaining] = useState(900);
+//   const [quizStarted, setQuizStarted] = useState(false);
+
+//   const questions = quizData?.questions || [];
+//   const totalQuestions = questions.length;
+
+//   // ---------------- TIMER ----------------
+//   useEffect(() => {
+//     if (quizStarted && timeRemaining > 0 && !showResults) {
+//       const timer = setTimeout(() => {
+//         setTimeRemaining(timeRemaining - 1);
+//       }, 1000);
+//       return () => clearTimeout(timer);
+//     } else if (timeRemaining === 0) {
+//       handleFinishQuiz();
+//     }
+//   }, [quizStarted, timeRemaining, showResults]);
+
+//   const handleStartQuiz = () => {
+//     setQuizStarted(true);
+//   };
+
+//   const handleAnswerSelect = (index: number) => {
+//     const newAnswers = [...selectedAnswers];
+//     newAnswers[currentQuestion] = index;
+//     setSelectedAnswers(newAnswers);
+//   };
+
+//   const handleNextQuestion = () => {
+//     if (currentQuestion < totalQuestions - 1) {
+//       setCurrentQuestion(currentQuestion + 1);
+//     } else {
+//       handleFinishQuiz();
+//     }
+//   };
+
+//   const handleFinishQuiz = async () => {
+//     setShowResults(true);
+
+//     const score = selectedAnswers.reduce((acc, answer, index) => {
+//       return acc + (answer === questions[index]?.correctAnswer ? 1 : 0);
+//     }, 0);
+
+//     if (user) {
+//       const quizScore: QuizScore = {
+//         user_id: user.id,
+//         user_email: user.primaryEmailAddress?.emailAddress || "",
+//         programming_language: language,
+//         score,
+//         total_questions: totalQuestions,
+//         completed_at: new Date().toISOString(),
+//         quiz_data: {
+//           questions: questions.map((q: any, index: number) => ({
+//             ...q,
+//             userAnswer: selectedAnswers[index],
+//             isCorrect: selectedAnswers[index] === q.correctAnswer,
+//           })),
+//         },
+//       };
+
+//       await supabase.from("quiz_scores").insert([quizScore]);
+//     }
+//   };
+
+//   const formatTime = (seconds: number) => {
+//     const m = Math.floor(seconds / 60);
+//     const s = seconds % 60;
+//     return `${m}:${s.toString().padStart(2, "0")}`;
+//   };
+
+//   const score = selectedAnswers.reduce((acc, answer, index) => {
+//     return acc + (answer === questions[index]?.correctAnswer ? 1 : 0);
+//   }, 0);
+
+//   const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+
+//   // ==================================================
+//   // MAIN WRAPPER WITH NEW THEME + LIGHTNING
+//   // ==================================================
+//   return (
+//     <section className="min-h-screen bg-[#020202] text-white relative overflow-hidden py-24 px-6">
+
+//       {/* LIGHTNING BACKGROUND */}
+//       <div className="fixed inset-0 pointer-events-none z-0">
+//         <Lightning hue={266} speed={1.2} intensity={1} size={1} />
+//       </div>
+
+//       <div className="max-w-4xl mx-auto relative z-10">
+
+//         {/* ================= START SCREEN ================= */}
+//         {!quizStarted && !showResults && (
+//           <div className="text-center">
+
+//             <h1 className="text-6xl font-black uppercase mb-10">
+//               {language} <span className="text-purple-500">Quiz</span>
+//             </h1>
+
+//             <div className="bg-[#080808] border border-white/10 p-12 mb-12">
+
+//               <div className="grid md:grid-cols-3 gap-8 mb-10">
+//                 <div>
+//                   <div className="text-4xl font-black">
+//                     {totalQuestions}
+//                   </div>
+//                   <div className="text-xs text-purple-400 uppercase">
+//                     Questions
+//                   </div>
+//                 </div>
+
+//                 <div>
+//                   <div className="text-4xl font-black">15</div>
+//                   <div className="text-xs text-purple-400 uppercase">
+//                     Minutes
+//                   </div>
+//                 </div>
+
+//                 <div>
+//                   <div className="text-4xl font-black">
+//                     {totalQuestions}
+//                   </div>
+//                   <div className="text-xs text-purple-400 uppercase">
+//                     Points
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <p className="text-white/40 max-w-xl mx-auto">
+//                 You have 15 minutes to complete {totalQuestions} questions.
+//                 Choose the correct option for each.
+//               </p>
+//             </div>
+
+//             <button
+//               onClick={handleStartQuiz}
+//               className="bg-purple-600 hover:bg-purple-500 px-12 py-5 font-black uppercase flex items-center gap-3 mx-auto transition hover:-translate-y-1"
+//             >
+//               Start Quiz <ArrowRight size={18} />
+//             </button>
+//           </div>
+//         )}
+
+//         {/* ================= QUIZ RUNNING ================= */}
+//         {quizStarted && !showResults && (
+//           <>
+//             {/* Header */}
+//             <div className="flex justify-between items-center mb-10">
+//               <div>
+//                 <h2 className="text-xl font-bold">
+//                   Question {currentQuestion + 1} / {totalQuestions}
+//                 </h2>
+//               </div>
+
+//               <div className="flex items-center gap-2 text-purple-400 font-mono">
+//                 <Clock size={18} />
+//                 {formatTime(timeRemaining)}
+//               </div>
+//             </div>
+
+//             {/* Progress */}
+//             <div className="w-full bg-white/5 h-2 mb-10">
+//               <div
+//                 className="bg-purple-500 h-2 transition-all"
+//                 style={{ width: `${progress}%` }}
+//               />
+//             </div>
+
+//             {/* Question Card */}
+//             <div className="bg-[#080808] border border-white/10 p-10">
+
+//               <h3 className="text-2xl font-semibold mb-8">
+//                 {questions[currentQuestion]?.question}
+//               </h3>
+
+//               <div className="space-y-4 mb-8">
+//                 {questions[currentQuestion]?.options.map(
+//                   (option: string, index: number) => (
+//                     <button
+//                       key={index}
+//                       onClick={() => handleAnswerSelect(index)}
+//                       className={`w-full text-left p-4 border transition ${
+//                         selectedAnswers[currentQuestion] === index
+//                           ? "bg-purple-500/20 border-purple-500"
+//                           : "border-white/10 hover:border-purple-400"
+//                       }`}
+//                     >
+//                       {String.fromCharCode(65 + index)}. {option}
+//                     </button>
+//                   )
+//                 )}
+//               </div>
+
+//               <div className="flex justify-end">
+//                 <button
+//                   onClick={handleNextQuestion}
+//                   disabled={
+//                     selectedAnswers[currentQuestion] === undefined
+//                   }
+//                   className="bg-purple-600 hover:bg-purple-500 px-8 py-3 uppercase disabled:opacity-40"
+//                 >
+//                   {currentQuestion === totalQuestions - 1
+//                     ? "Finish"
+//                     : "Next"}
+//                 </button>
+//               </div>
+//             </div>
+//           </>
+//         )}
+
+//         {/* ================= RESULTS ================= */}
+//         {showResults && (
+//           <div className="text-center">
+
+//             <div className="text-6xl font-black mb-4 text-purple-400">
+//               {score} / {totalQuestions}
+//             </div>
+
+//             <h2 className="text-4xl font-black mb-10">
+//               Quiz Complete
+//             </h2>
+
+//             <div className="space-y-6 mb-12 text-left">
+//               {questions.map((q: any, index: number) => {
+//                 const userAnswer = selectedAnswers[index];
+//                 const correct = userAnswer === q.correctAnswer;
+
+//                 return (
+//                   <div
+//                     key={index}
+//                     className="bg-[#080808] border border-white/10 p-6"
+//                   >
+//                     <div className="flex justify-between mb-4">
+//                       <h3>
+//                         {index + 1}. {q.question}
+//                       </h3>
+
+//                       {correct ? (
+//                         <CheckCircle className="text-green-400" />
+//                       ) : (
+//                         <XCircle className="text-red-400" />
+//                       )}
+//                     </div>
+
+//                     {q.options.map(
+//                       (opt: string, i: number) => (
+//                         <div
+//                           key={i}
+//                           className={`p-2 text-sm ${
+//                             i === q.correctAnswer
+//                               ? "text-green-400"
+//                               : i === userAnswer
+//                               ? "text-red-400"
+//                               : "text-white/50"
+//                           }`}
+//                         >
+//                           {String.fromCharCode(65 + i)}. {opt}
+//                         </div>
+//                       )
+//                     )}
+//                   </div>
+//                 );
+//               })}
+//             </div>
+
+//             <div className="flex justify-center gap-6">
+//               <button
+//                 onClick={onComplete}
+//                 className="bg-purple-600 px-8 py-3 uppercase"
+//               >
+//                 <RotateCcw size={16} className="inline mr-2" />
+//                 Take Another
+//               </button>
+
+//               <button
+//                 onClick={() => (window.location.href = "/score")}
+//                 className="border border-white/20 px-8 py-3 uppercase"
+//               >
+//                 View Scores
+//               </button>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Quiz;
 
 
 

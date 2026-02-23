@@ -13,15 +13,25 @@ const Library = () => {
   const [expandedExamples, setExpandedExamples] = useState<Set<number>>(new Set());
   const [isLoading, setIsLoading] = useState(false);
 
+  // ✅ Enhanced Languages (Rust Removed)
   const languages = [
-    { name: "JavaScript", icon: "JS" },
-    { name: "Python", icon: "PY" },
-    { name: "Java", icon: "JV" },
-    { name: "C++", icon: "C+" },
-    { name: "C#", icon: "C#" }
+    { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "C++", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "C#", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+    { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+    { name: "Go", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+    { name: "Swift", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
+    { name: "Kotlin", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+    { name: "Dart", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+    { name: "Ruby", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" },
+    { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "R", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" },
+    { name: "Scala", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" }
   ];
 
-  // ---------- Generate Notes ----------
   const handleLanguageClick = async (language: string) => {
     if (!isSignedIn) return;
 
@@ -51,83 +61,54 @@ const Library = () => {
     setExpandedExamples(new Set());
   };
 
-  // =============================
-  // LIGHTNING BACKGROUND WRAPPER
-  // =============================
   const Background = () => (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      <div className="absolute inset-0">
-        <Lightning
-          hue={266}
-          xOffset={-0.1}
-          speed={1.2}
-          intensity={1}
-          size={1}
-        />
-      </div>
-
-      {/* Glow */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+      <Lightning hue={266} xOffset={-0.1} speed={1.2} intensity={1} size={1} />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/20 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/20 blur-[140px] rounded-full"></div>
     </div>
   );
 
-  // =============================
-  // LOADING SCREEN
-  // =============================
+  // ================= LOADING =================
   if (isLoading) {
     return (
       <section className="relative min-h-screen flex items-center justify-center bg-[#020202] text-white">
-
         <Background />
-
         <div className="relative z-10 text-center">
           <div className="w-20 h-20 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
-          <p className="text-white/70 uppercase tracking-widest text-sm">
+          <p className="text-purple-400 uppercase tracking-widest text-sm">
             Generating AI Notes...
           </p>
         </div>
-
       </section>
     );
   }
 
-  // =============================
-  // NOTES VIEW
-  // =============================
+  // ================= NOTES VIEW =================
   if (selectedLanguage && notesData) {
     return (
       <section className="relative min-h-screen bg-[#020202] text-white px-6 py-24">
-
         <Background />
 
         <div className="relative z-10 max-w-4xl mx-auto">
 
-          {/* Header */}
-          <div className="mb-16">
-            <button
-              onClick={resetView}
-              className="text-purple-400 text-sm mb-6"
-            >
-              ← Back
-            </button>
+          <button
+            onClick={resetView}
+            className="text-purple-400 text-sm mb-8 hover:underline"
+          >
+            ← Back to Library
+          </button>
 
-            <h1 className="text-5xl font-black uppercase">
-              {notesData.title}
-            </h1>
+          <h1 className="text-5xl font-black uppercase mb-10 tracking-tight">
+            {notesData.title}
+          </h1>
 
-            <p className="text-white/40 text-sm mt-2">
-              AI Generated Programming Notes
-            </p>
-          </div>
-
-          {/* Theory */}
-          <div className="border border-purple-500/20 p-8 bg-purple-500/[0.02] mb-10 backdrop-blur">
-            <h2 className="text-xl font-bold mb-4 uppercase">
+          {/* Theory Card */}
+          <div className="border border-purple-500/30 p-8 bg-gradient-to-br from-purple-500/5 to-transparent backdrop-blur-xl rounded-2xl mb-12 shadow-xl">
+            <h2 className="text-xl font-bold mb-4 uppercase text-purple-400">
               Theory
             </h2>
-
-            <p className="text-white/70 whitespace-pre-line">
+            <p className="text-white/70 whitespace-pre-line leading-relaxed">
               {notesData.theory}
             </p>
           </div>
@@ -140,14 +121,14 @@ const Library = () => {
               return (
                 <div
                   key={index}
-                  className="border border-white/10 bg-black/60 backdrop-blur p-8"
+                  className="border border-white/10 bg-black/60 p-6 rounded-xl transition hover:border-purple-500/40"
                 >
                   <button
                     onClick={() => toggleExample(index)}
                     className="flex justify-between w-full text-left"
                   >
                     <div>
-                      <h3 className="text-xl font-bold">
+                      <h3 className="text-lg font-bold">
                         {example.title}
                       </h3>
                       <p className="text-white/40 text-sm">
@@ -156,14 +137,14 @@ const Library = () => {
                     </div>
 
                     <ChevronDown
-                      className={`transition ${
+                      className={`transition duration-300 ${
                         open ? "rotate-180 text-purple-400" : ""
                       }`}
                     />
                   </button>
 
                   {open && (
-                    <pre className="mt-6 bg-[#050505] p-4 border border-purple-500/20 text-purple-300 overflow-auto">
+                    <pre className="mt-6 bg-[#050505] p-4 border border-purple-500/30 rounded-xl text-purple-300 overflow-auto text-sm">
                       <code>{example.code}</code>
                     </pre>
                   )}
@@ -172,80 +153,553 @@ const Library = () => {
             })}
           </div>
 
-          {/* CTA */}
+          {/* Quiz Button */}
           <div className="mt-20 text-center">
             <Link
               to="/courses"
-              className="bg-purple-600 hover:bg-purple-500 px-10 py-4 uppercase font-bold tracking-wide"
+              className="inline-block bg-gradient-to-r from-purple-600 to-purple-500 hover:scale-105 transition transform px-12 py-4 uppercase font-bold rounded-full shadow-lg shadow-purple-600/30"
             >
               Take {selectedLanguage} Quiz
             </Link>
           </div>
-
         </div>
       </section>
     );
   }
 
-  // =============================
-  // LANGUAGE SELECT VIEW
-  // =============================
+  // ================= LANGUAGE GRID =================
   return (
     <section className="relative py-32 px-6 lg:px-24 bg-[#020202] text-white">
-
       <Background />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 
         <div className="text-center mb-24">
-          <h1 className="text-7xl font-black uppercase">
+          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight">
             Programming <span className="text-purple-500">Library</span>
           </h1>
-
-          {!isSignedIn && (
-            <div className="mt-10 border border-purple-500/20 p-10 max-w-md mx-auto">
-              <p className="text-white/50 mb-6 uppercase text-xs">
-                Authentication Required
-              </p>
-
-              <Link
-                to="/sign-up"
-                className="bg-purple-600 px-8 py-3 font-bold uppercase"
-              >
-                Get Started
-              </Link>
-            </div>
-          )}
+          <p className="text-white/40 mt-4">
+            Select a language to generate AI-powered notes instantly
+          </p>
         </div>
 
-        {/* Languages */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-white/5">
+        {/* Enhanced Language Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {languages.map((lang) => (
             <button
               key={lang.name}
               disabled={!isSignedIn}
               onClick={() => handleLanguageClick(lang.name)}
-              className="group bg-black p-12 hover:bg-purple-500/[0.03] transition"
+              className="group relative bg-black/60 border border-white/10 p-8 rounded-2xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/20"
             >
-              <div className="space-y-4 text-center">
-                <div className="w-14 h-14 border border-white/10 flex items-center justify-center mx-auto">
-                  {lang.icon}
-                </div>
+              <div className="absolute inset-0 rounded-2xl bg-purple-600/0 group-hover:bg-purple-600/5 transition"></div>
 
-                <h3 className="font-bold uppercase group-hover:text-purple-400">
-                  {lang.name}
-                </h3>
-              </div>
+              <img
+                src={lang.logo}
+                alt={lang.name}
+                className="w-16 h-16 mx-auto mb-6 object-contain transition group-hover:scale-110"
+              />
+
+              <h3 className="font-bold uppercase text-sm tracking-wide group-hover:text-purple-400 transition">
+                {lang.name}
+              </h3>
             </button>
           ))}
         </div>
-
       </div>
     </section>
   );
 };
 
 export default Library;
+
+
+
+
+
+
+
+
+// import { useState } from "react";
+// import { useAuth } from "@clerk/clerk-react";
+// import { Link } from "react-router-dom";
+// import { ChevronDown } from "lucide-react";
+// import { generateLibraryNotes } from "../lib/gemini";
+// import Lightning from "@/components/Lightning";
+
+// const Library = () => {
+//   const { isSignedIn } = useAuth();
+
+//   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+//   const [notesData, setNotesData] = useState<any>(null);
+//   const [expandedExamples, setExpandedExamples] = useState<Set<number>>(new Set());
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   // ✅ Languages With Logos
+//   const languages = [
+//     { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+//     { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+//     { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+//     { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+//     { name: "C++", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+//     { name: "C#", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+//     { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+//     { name: "Rust", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg" },
+//     { name: "Go", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+//     { name: "Swift", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
+//     { name: "Kotlin", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+//     { name: "Dart", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+//     { name: "Ruby", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" },
+//     { name: "SQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+//     { name: "R", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" },
+//     { name: "Scala", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" }
+//   ];
+
+//   const handleLanguageClick = async (language: string) => {
+//     if (!isSignedIn) return;
+
+//     setSelectedLanguage(language);
+//     setIsLoading(true);
+//     setExpandedExamples(new Set([0]));
+
+//     try {
+//       const notes = await generateLibraryNotes(language);
+//       setNotesData(notes);
+//     } catch (err) {
+//       console.error(err);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const toggleExample = (index: number) => {
+//     const newSet = new Set(expandedExamples);
+//     newSet.has(index) ? newSet.delete(index) : newSet.add(index);
+//     setExpandedExamples(newSet);
+//   };
+
+//   const resetView = () => {
+//     setSelectedLanguage(null);
+//     setNotesData(null);
+//     setExpandedExamples(new Set());
+//   };
+
+//   const Background = () => (
+//     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+//       <Lightning hue={266} xOffset={-0.1} speed={1.2} intensity={1} size={1} />
+//       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//     </div>
+//   );
+
+//   if (isLoading) {
+//     return (
+//       <section className="relative min-h-screen flex items-center justify-center bg-[#020202] text-white">
+//         <Background />
+//         <div className="relative z-10 text-center">
+//           <div className="w-20 h-20 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+//           <p className="text-white/70 uppercase tracking-widest text-sm">
+//             Generating AI Notes...
+//           </p>
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   if (selectedLanguage && notesData) {
+//     return (
+//       <section className="relative min-h-screen bg-[#020202] text-white px-6 py-24">
+//         <Background />
+//         <div className="relative z-10 max-w-4xl mx-auto">
+
+//           <button onClick={resetView} className="text-purple-400 text-sm mb-6">
+//             ← Back
+//           </button>
+
+//           <h1 className="text-5xl font-black uppercase mb-6">
+//             {notesData.title}
+//           </h1>
+
+//           <div className="border border-purple-500/20 p-8 bg-purple-500/[0.02] mb-10 backdrop-blur">
+//             <h2 className="text-xl font-bold mb-4 uppercase">Theory</h2>
+//             <p className="text-white/70 whitespace-pre-line">
+//               {notesData.theory}
+//             </p>
+//           </div>
+
+//           <div className="space-y-6">
+//             {notesData.examples?.map((example: any, index: number) => {
+//               const open = expandedExamples.has(index);
+//               return (
+//                 <div key={index} className="border border-white/10 bg-black/60 p-8">
+//                   <button
+//                     onClick={() => toggleExample(index)}
+//                     className="flex justify-between w-full text-left"
+//                   >
+//                     <div>
+//                       <h3 className="text-xl font-bold">{example.title}</h3>
+//                       <p className="text-white/40 text-sm">
+//                         {example.description}
+//                       </p>
+//                     </div>
+
+//                     <ChevronDown
+//                       className={`transition ${
+//                         open ? "rotate-180 text-purple-400" : ""
+//                       }`}
+//                     />
+//                   </button>
+
+//                   {open && (
+//                     <pre className="mt-6 bg-[#050505] p-4 border border-purple-500/20 text-purple-300 overflow-auto">
+//                       <code>{example.code}</code>
+//                     </pre>
+//                   )}
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           <div className="mt-20 text-center">
+//             <Link
+//               to="/courses"
+//               className="bg-purple-600 hover:bg-purple-500 px-10 py-4 uppercase font-bold"
+//             >
+//               Take {selectedLanguage} Quiz
+//             </Link>
+//           </div>
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   return (
+//     <section className="relative py-32 px-6 lg:px-24 bg-[#020202] text-white">
+//       <Background />
+
+//       <div className="relative z-10 max-w-7xl mx-auto">
+//         <div className="text-center mb-24">
+//           <h1 className="text-7xl font-black uppercase">
+//             Programming <span className="text-purple-500">Library</span>
+//           </h1>
+//         </div>
+
+//         {/* ✅ Language Grid With Logos */}
+//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+//           {languages.map((lang) => (
+//             <button
+//               key={lang.name}
+//               disabled={!isSignedIn}
+//               onClick={() => handleLanguageClick(lang.name)}
+//               className="group bg-black border border-white/10 p-10 hover:border-purple-500/40 hover:-translate-y-1 transition text-center"
+//             >
+//               <img
+//                 src={lang.logo}
+//                 alt={lang.name}
+//                 className="w-14 h-14 mx-auto mb-6 object-contain"
+//               />
+
+//               <h3 className="font-bold uppercase group-hover:text-purple-400">
+//                 {lang.name}
+//               </h3>
+//             </button>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Library;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useState } from "react";
+// import { useAuth } from "@clerk/clerk-react";
+// import { Link } from "react-router-dom";
+// import { ChevronDown } from "lucide-react";
+// import { generateLibraryNotes } from "../lib/gemini";
+// import Lightning from "@/components/Lightning";
+
+// const Library = () => {
+//   const { isSignedIn } = useAuth();
+
+//   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+//   const [notesData, setNotesData] = useState<any>(null);
+//   const [expandedExamples, setExpandedExamples] = useState<Set<number>>(new Set());
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const languages = [
+//     { name: "JavaScript", icon: "JS" },
+//     { name: "Python", icon: "PY" },
+//     { name: "Java", icon: "JV" },
+//     { name: "C++", icon: "C+" },
+//     { name: "C#", icon: "C#" }
+//   ];
+
+//   // ---------- Generate Notes ----------
+//   const handleLanguageClick = async (language: string) => {
+//     if (!isSignedIn) return;
+
+//     setSelectedLanguage(language);
+//     setIsLoading(true);
+//     setExpandedExamples(new Set([0]));
+
+//     try {
+//       const notes = await generateLibraryNotes(language);
+//       setNotesData(notes);
+//     } catch (err) {
+//       console.error(err);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const toggleExample = (index: number) => {
+//     const newSet = new Set(expandedExamples);
+//     newSet.has(index) ? newSet.delete(index) : newSet.add(index);
+//     setExpandedExamples(newSet);
+//   };
+
+//   const resetView = () => {
+//     setSelectedLanguage(null);
+//     setNotesData(null);
+//     setExpandedExamples(new Set());
+//   };
+
+//   // =============================
+//   // LIGHTNING BACKGROUND WRAPPER
+//   // =============================
+//   const Background = () => (
+//     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+//       <div className="absolute inset-0">
+//         <Lightning
+//           hue={266}
+//           xOffset={-0.1}
+//           speed={1.2}
+//           intensity={1}
+//           size={1}
+//         />
+//       </div>
+
+//       {/* Glow */}
+//       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//     </div>
+//   );
+
+//   // =============================
+//   // LOADING SCREEN
+//   // =============================
+//   if (isLoading) {
+//     return (
+//       <section className="relative min-h-screen flex items-center justify-center bg-[#020202] text-white">
+
+//         <Background />
+
+//         <div className="relative z-10 text-center">
+//           <div className="w-20 h-20 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+//           <p className="text-white/70 uppercase tracking-widest text-sm">
+//             Generating AI Notes...
+//           </p>
+//         </div>
+
+//       </section>
+//     );
+//   }
+
+//   // =============================
+//   // NOTES VIEW
+//   // =============================
+//   if (selectedLanguage && notesData) {
+//     return (
+//       <section className="relative min-h-screen bg-[#020202] text-white px-6 py-24">
+
+//         <Background />
+
+//         <div className="relative z-10 max-w-4xl mx-auto">
+
+//           {/* Header */}
+//           <div className="mb-16">
+//             <button
+//               onClick={resetView}
+//               className="text-purple-400 text-sm mb-6"
+//             >
+//               ← Back
+//             </button>
+
+//             <h1 className="text-5xl font-black uppercase">
+//               {notesData.title}
+//             </h1>
+
+//             <p className="text-white/40 text-sm mt-2">
+//               AI Generated Programming Notes
+//             </p>
+//           </div>
+
+//           {/* Theory */}
+//           <div className="border border-purple-500/20 p-8 bg-purple-500/[0.02] mb-10 backdrop-blur">
+//             <h2 className="text-xl font-bold mb-4 uppercase">
+//               Theory
+//             </h2>
+
+//             <p className="text-white/70 whitespace-pre-line">
+//               {notesData.theory}
+//             </p>
+//           </div>
+
+//           {/* Examples */}
+//           <div className="space-y-6">
+//             {notesData.examples?.map((example: any, index: number) => {
+//               const open = expandedExamples.has(index);
+
+//               return (
+//                 <div
+//                   key={index}
+//                   className="border border-white/10 bg-black/60 backdrop-blur p-8"
+//                 >
+//                   <button
+//                     onClick={() => toggleExample(index)}
+//                     className="flex justify-between w-full text-left"
+//                   >
+//                     <div>
+//                       <h3 className="text-xl font-bold">
+//                         {example.title}
+//                       </h3>
+//                       <p className="text-white/40 text-sm">
+//                         {example.description}
+//                       </p>
+//                     </div>
+
+//                     <ChevronDown
+//                       className={`transition ${
+//                         open ? "rotate-180 text-purple-400" : ""
+//                       }`}
+//                     />
+//                   </button>
+
+//                   {open && (
+//                     <pre className="mt-6 bg-[#050505] p-4 border border-purple-500/20 text-purple-300 overflow-auto">
+//                       <code>{example.code}</code>
+//                     </pre>
+//                   )}
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           {/* CTA */}
+//           <div className="mt-20 text-center">
+//             <Link
+//               to="/courses"
+//               className="bg-purple-600 hover:bg-purple-500 px-10 py-4 uppercase font-bold tracking-wide"
+//             >
+//               Take {selectedLanguage} Quiz
+//             </Link>
+//           </div>
+
+//         </div>
+//       </section>
+//     );
+//   }
+
+//   // =============================
+//   // LANGUAGE SELECT VIEW
+//   // =============================
+//   return (
+//     <section className="relative py-32 px-6 lg:px-24 bg-[#020202] text-white">
+
+//       <Background />
+
+//       <div className="relative z-10 max-w-7xl mx-auto">
+
+//         <div className="text-center mb-24">
+//           <h1 className="text-7xl font-black uppercase">
+//             Programming <span className="text-purple-500">Library</span>
+//           </h1>
+
+//           {!isSignedIn && (
+//             <div className="mt-10 border border-purple-500/20 p-10 max-w-md mx-auto">
+//               <p className="text-white/50 mb-6 uppercase text-xs">
+//                 Authentication Required
+//               </p>
+
+//               <Link
+//                 to="/sign-up"
+//                 className="bg-purple-600 px-8 py-3 font-bold uppercase"
+//               >
+//                 Get Started
+//               </Link>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* Languages */}
+//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-white/5">
+//           {languages.map((lang) => (
+//             <button
+//               key={lang.name}
+//               disabled={!isSignedIn}
+//               onClick={() => handleLanguageClick(lang.name)}
+//               className="group bg-black p-12 hover:bg-purple-500/[0.03] transition"
+//             >
+//               <div className="space-y-4 text-center">
+//                 <div className="w-14 h-14 border border-white/10 flex items-center justify-center mx-auto">
+//                   {lang.icon}
+//                 </div>
+
+//                 <h3 className="font-bold uppercase group-hover:text-purple-400">
+//                   {lang.name}
+//                 </h3>
+//               </div>
+//             </button>
+//           ))}
+//         </div>
+
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Library;
 
 
 
