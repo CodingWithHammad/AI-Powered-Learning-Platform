@@ -285,7 +285,6 @@ const MiniProjects = () => {
       <body>${p.html}<script>${p.javascript}</script></body>
     </html>
   `
-
   return (
     <div className="relative min-h-screen bg-black text-white">
       <div className="fixed inset-0 pointer-events-none z-0">
