@@ -14,7 +14,6 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
 import Lightning from "../components/Lightning"
 
 /* ================= PROJECT DATA ================= */
-
 const projects = [
   /* ========= MODERN GLASS CALCULATOR ========= */
   {
