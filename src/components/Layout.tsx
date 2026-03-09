@@ -355,7 +355,7 @@ const Layout = () => {
                 <h6>Hammad Ullah KHan</h6></h4>
 
               <ul className="space-y-4">
-                {["Home", "About", "Contact"].map((item) => (
+                {["Khan Sahab", "Riddhi Kaushik", "Toheed"].map((item) => (
                   <li key={item}>
                     <Link to={`/${item.toLowerCase()}`} className="text-white/40 hover:text-purple-400 transition-colors text-sm flex items-center gap-2 group">
                       <span className="w-0 group-hover:w-2 h-[1px] bg-purple-500 transition-all"></span>
@@ -365,7 +365,6 @@ const Layout = () => {
                 ))}
               </ul>
             </div>
-
             {/* Learning */}
             <div className="md:col-span-3 space-y-8">
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-white border-b border-purple-500/20 pb-4 inline-block">
