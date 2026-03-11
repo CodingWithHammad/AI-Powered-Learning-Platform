@@ -366,6 +366,7 @@ const Layout = () => {
               </ul>
             </div>
             
+            
             {/* Learning */}
             <div className="md:col-span-3 space-y-8">
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-white border-b border-purple-500/20 pb-4 inline-block">
