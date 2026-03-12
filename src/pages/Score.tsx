@@ -376,193 +376,1541 @@
 
 
 
-import React from 'react'
-import Lightning from '../components/Lightning'
+// import React from 'react'
+// import Lightning from '../components/Lightning'
 
-const Scores: React.FC = () => {
-  const stats = [
-    { label: "Total Quizzes", value: "0", icon: "🎯" },
-    { label: "Average Score", value: "0%", icon: "📈" },
-    { label: "Best Score", value: "0%", icon: "🏆" },
-    { label: "Languages", value: "0", icon: "📅" }
-  ]
+// const Scores: React.FC = () => {
+//   const stats = [
+//     { label: "Total Quizzes", value: "0", icon: "🎯" },
+//     { label: "Average Score", value: "0%", icon: "📈" },
+//     { label: "Best Score", value: "0%", icon: "🏆" },
+//     { label: "Languages", value: "0", icon: "📅" }
+//   ]
+
+//   return (
+//     <div className="relative min-h-screen bg-black text-white overflow-hidden">
+
+//       {/* ================= LIGHTNING BACKGROUND ================= */}
+//       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+//         <div className="absolute inset-0">
+//           <Lightning
+//             hue={266}
+//             xOffset={-0.1}
+//            speed={1.5}
+//             intensity={2}
+//             size={1}
+//           />
+//         </div>
+
+//         {/* Glow Effects */}
+//         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+//       </div>
+
+//       {/* ================= MAIN CONTENT ================= */}
+//       <section className="relative z-10 pt-0 pb-24 px-6 lg:px-24 border-t border-white/5">
+
+//         <div className="max-w-7xl mx-auto">
+
+//           {/* Header */}
+//           <div className="text-center mb-16 space-y-6">
+//             <div className="flex justify-center mb-4">
+//               <div className="w-20 h-20 rounded-full bg-purple-600/10 border border-purple-500/30 flex items-center justify-center">
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+//                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+//                 </svg>
+//               </div>
+//             </div>
+
+//             <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
+//               Quiz <span className="text-purple-500">Scores</span>
+//             </h2>
+
+//             <p className="text-white/40 max-w-xl mx-auto text-lg leading-relaxed">
+//               Track your learning progress and compare your performance across different programming languages.
+//             </p>
+//           </div>
+
+//           {/* Stats Grid */}
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+//             {stats.map((stat, idx) => (
+//               <div
+//                 key={idx}
+//                 className="bg-[#0a0a0a] border border-white/5 p-8 group hover:border-purple-500/40 transition-all relative overflow-hidden"
+//               >
+//                 <div className="absolute top-0 right-0 p-3 text-[8px] text-white/10 uppercase tracking-widest">
+//                   METRIC_0{idx + 1}
+//                 </div>
+
+//                 <div className="space-y-4">
+//                   <div className="w-12 h-12 border border-white/10 flex items-center justify-center text-xl">
+//                     {stat.icon}
+//                   </div>
+
+//                   <div className="space-y-1">
+//                     <div className="text-4xl font-black tracking-tighter">
+//                       {stat.value}
+//                     </div>
+//                     <div className="text-[10px] uppercase text-white/30 tracking-widest">
+//                       {stat.label}
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 <div className="absolute bottom-0 left-0 h-1 bg-purple-600/20 w-8 group-hover:w-full transition-all duration-500"></div>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* Empty Dashboard */}
+//           <div className="bg-[#050505] border border-white/10 min-h-[450px] flex flex-col items-center justify-center text-center p-12 relative overflow-hidden">
+
+//             <div className="space-y-8">
+//               <div className="w-24 h-24 rounded-full bg-purple-600/[0.03] border border-white/5 flex items-center justify-center mx-auto mb-4">
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="h-12 w-12 text-white/10"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   stroke="currentColor"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth={1}
+//                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+//                   />
+//                 </svg>
+//               </div>
+
+//               <div>
+//                 <h3 className="text-3xl font-black uppercase tracking-tighter">
+//                   No Scores Found
+//                 </h3>
+//                 <p className="text-white/30 italic">
+//                   Take your first quiz to see your scores here!
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+
+//         </div>
+//       </section>
+//     </div>
+//   )
+// }
+
+// export default Scores
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react'
+// import Lightning from '../components/Lightning'
+// import BSTVisualizer from '@/components/BTSVisualizer'
+
+// const Scores: React.FC = () => {
+
+//   const stats = [
+//     { label: "Total Quizzes", value: "0", icon: "🎯" },
+//     { label: "Average Score", value: "0%", icon: "📈" },
+//     { label: "Best Score", value: "0%", icon: "🏆" },
+//     { label: "Languages", value: "0", icon: "📅" }
+//   ]
+
+//   return (
+
+//     <div className="relative min-h-screen bg-black text-white overflow-hidden">
+
+//       {/* ================= LIGHTNING BACKGROUND ================= */}
+
+//       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+//         <div className="absolute inset-0">
+//           <Lightning
+//             hue={266}
+//             xOffset={-0.1}
+//             speed={1.5}
+//             intensity={2}
+//             size={1}
+//           />
+//         </div>
+
+//         {/* Glow Effects */}
+
+//         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+
+//         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+
+//       </div>
+
+//       {/* ================= SCORE SECTION ================= */}
+
+//       <section className="relative z-10 pt-0 pb-24 px-6 lg:px-24 border-t border-white/5">
+
+//         <div className="max-w-7xl mx-auto">
+
+//           {/* Header */}
+
+//           <div className="text-center mb-16 space-y-6">
+
+//             <div className="flex justify-center mb-4">
+//               <div className="w-20 h-20 rounded-full bg-purple-600/10 border border-purple-500/30 flex items-center justify-center">
+
+//                 <svg xmlns="http://www.w3.org/2000/svg"
+//                   className="h-10 w-10 text-purple-500"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   stroke="currentColor">
+
+//                   <path strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth={1.5}
+//                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+
+//                 </svg>
+
+//               </div>
+//             </div>
+
+//             <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
+//               Quiz <span className="text-purple-500">Scores</span>
+//             </h2>
+
+//             <p className="text-white/40 max-w-xl mx-auto text-lg leading-relaxed">
+//               Track your learning progress and compare your performance across different programming languages.
+//             </p>
+
+//           </div>
+
+//           {/* Stats Grid */}
+
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+//             {stats.map((stat, idx) => (
+
+//               <div
+//                 key={idx}
+//                 className="bg-[#0a0a0a] border border-white/5 p-8 group hover:border-purple-500/40 transition-all relative overflow-hidden"
+//               >
+
+//                 <div className="absolute top-0 right-0 p-3 text-[8px] text-white/10 uppercase tracking-widest">
+//                   METRIC_0{idx + 1}
+//                 </div>
+
+//                 <div className="space-y-4">
+
+//                   <div className="w-12 h-12 border border-white/10 flex items-center justify-center text-xl">
+//                     {stat.icon}
+//                   </div>
+
+//                   <div className="space-y-1">
+//                     <div className="text-4xl font-black tracking-tighter">
+//                       {stat.value}
+//                     </div>
+
+//                     <div className="text-[10px] uppercase text-white/30 tracking-widest">
+//                       {stat.label}
+//                     </div>
+
+//                   </div>
+
+//                 </div>
+
+//                 <div className="absolute bottom-0 left-0 h-1 bg-purple-600/20 w-8 group-hover:w-full transition-all duration-500"></div>
+
+//               </div>
+
+//             ))}
+
+//           </div>
+
+//           {/* Empty Dashboard */}
+
+//           <div className="bg-[#050505] border border-white/10 min-h-[450px] flex flex-col items-center justify-center text-center p-12 relative overflow-hidden">
+
+//             <div className="space-y-8">
+
+//               <div className="w-24 h-24 rounded-full bg-purple-600/[0.03] border border-white/5 flex items-center justify-center mx-auto mb-4">
+
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="h-12 w-12 text-white/10"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   stroke="currentColor">
+
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth={1}
+//                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+//                   />
+
+//                 </svg>
+
+//               </div>
+
+//               <div>
+//                 <h3 className="text-3xl font-black uppercase tracking-tighter">
+//                   No Scores Found
+//                 </h3>
+
+//                 <p className="text-white/30 italic">
+//                   Take your first quiz to see your scores here!
+//                 </p>
+
+//               </div>
+
+//             </div>
+
+//           </div>
+
+//         </div>
+
+//       </section>
+
+//       {/* ================= BST VISUALIZER SECTION ================= */}
+
+//       <section className="relative z-10 py-24 px-6 lg:px-24 border-t border-white/5">
+
+//         <div className="max-w-7xl mx-auto text-center mb-16">
+
+//           <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
+
+//             BST <span className="text-purple-500">Visualizer</span>
+
+//           </h2>
+
+//           <p className="text-white/40 max-w-xl mx-auto text-lg leading-relaxed mt-6">
+
+//             Practice Data Structures interactively using our 3D Binary Search Tree visualizer built with React and Three.js.
+
+//           </p>
+
+//         </div>
+
+//         <BSTVisualizer />
+
+//       </section>
+
+//     </div>
+
+//   )
+// }
+
+// export default Scores
+
+
+
+
+
+// import React, { useState } from "react"
+
+// const AlgorithmVisualizer = () => {
+
+//   const [array, setArray] = useState<number[]>([])
+//   const [speed, setSpeed] = useState(100)
+
+//   const generateArray = () => {
+//     const newArray = []
+//     for (let i = 0; i < 30; i++) {
+//       newArray.push(Math.floor(Math.random() * 200) + 20)
+//     }
+//     setArray(newArray)
+//   }
+
+//   const sleep = (ms: number) => new Promise(res => setTimeout(res, ms))
+
+//   /* ================= BUBBLE SORT ================= */
+
+//   const bubbleSort = async () => {
+
+//     let arr = [...array]
+
+//     for (let i = 0; i < arr.length; i++) {
+
+//       for (let j = 0; j < arr.length - i - 1; j++) {
+
+//         if (arr[j] > arr[j + 1]) {
+
+//           let temp = arr[j]
+//           arr[j] = arr[j + 1]
+//           arr[j + 1] = temp
+
+//           setArray([...arr])
+//           await sleep(speed)
+//         }
+
+//       }
+
+//     }
+
+//   }
+
+//   /* ================= QUICK SORT ================= */
+
+//   const quickSort = async () => {
+
+//     const arr = [...array]
+
+//     const partition = async (low: number, high: number) => {
+
+//       let pivot = arr[high]
+//       let i = low - 1
+
+//       for (let j = low; j < high; j++) {
+
+//         if (arr[j] < pivot) {
+
+//           i++
+
+//           let temp = arr[i]
+//           arr[i] = arr[j]
+//           arr[j] = temp
+
+//           setArray([...arr])
+//           await sleep(speed)
+
+//         }
+
+//       }
+
+//       let temp = arr[i + 1]
+//       arr[i + 1] = arr[high]
+//       arr[high] = temp
+
+//       setArray([...arr])
+//       await sleep(speed)
+
+//       return i + 1
+
+//     }
+
+//     const sort = async (low: number, high: number) => {
+
+//       if (low < high) {
+
+//         const pi = await partition(low, high)
+
+//         await sort(low, pi - 1)
+//         await sort(pi + 1, high)
+
+//       }
+
+//     }
+
+//     await sort(0, arr.length - 1)
+
+//   }
+
+//   /* ================= MERGE SORT ================= */
+
+//   const mergeSort = async () => {
+
+//     const arr = [...array]
+
+//     const merge = async (l: number, m: number, r: number) => {
+
+//       let left = arr.slice(l, m + 1)
+//       let right = arr.slice(m + 1, r + 1)
+
+//       let i = 0
+//       let j = 0
+//       let k = l
+
+//       while (i < left.length && j < right.length) {
+
+//         if (left[i] <= right[j]) {
+//           arr[k] = left[i]
+//           i++
+//         } else {
+//           arr[k] = right[j]
+//           j++
+//         }
+
+//         setArray([...arr])
+//         await sleep(speed)
+//         k++
+//       }
+
+//       while (i < left.length) {
+//         arr[k] = left[i]
+//         i++
+//         k++
+//         setArray([...arr])
+//         await sleep(speed)
+//       }
+
+//       while (j < right.length) {
+//         arr[k] = right[j]
+//         j++
+//         k++
+//         setArray([...arr])
+//         await sleep(speed)
+//       }
+
+//     }
+
+//     const sort = async (l: number, r: number) => {
+
+//       if (l >= r) return
+
+//       const m = Math.floor((l + r) / 2)
+
+//       await sort(l, m)
+//       await sort(m + 1, r)
+
+//       await merge(l, m, r)
+
+//     }
+
+//     await sort(0, arr.length - 1)
+
+//   }
+
+//   return (
+
+//     <div className="min-h-screen bg-black text-white flex flex-col items-center p-10">
+
+//       <h1 className="text-6xl font-black mb-10">
+//         Algorithm <span className="text-sky-500">Visualizer</span>
+//       </h1>
+
+//       {/* Controls */}
+
+//       <div className="flex flex-wrap gap-4 mb-10">
+
+//         <button
+//           onClick={generateArray}
+//           className="px-5 py-2 bg-purple-600 rounded"
+//         >
+//           Generate Array
+//         </button>
+
+//         <button
+//           onClick={bubbleSort}
+//           className="px-5 py-2 bg-blue-600 rounded"
+//         >
+//           Bubble Sort
+//         </button>
+
+//         <button
+//           onClick={quickSort}
+//           className="px-5 py-2 bg-green-600 rounded"
+//         >
+//           Quick Sort
+//         </button>
+
+//         <button
+//           onClick={mergeSort}
+//           className="px-5 py-2 bg-red-600 rounded"
+//         >
+//           Merge Sort
+//         </button>
+
+//       </div>
+
+//       {/* Speed Control */}
+
+//       <div className="mb-10">
+
+//         <label className="mr-4">Speed:</label>
+
+//         <input
+//           type="range"
+//           min="10"
+//           max="500"
+//           value={speed}
+//           onChange={(e) => setSpeed(Number(e.target.value))}
+//         />
+
+//       </div>
+
+//       {/* Bars */}
+
+//       <div className="flex items-end gap-1 h-[300px]">
+
+//         {array.map((value, idx) => (
+
+//           <div
+//             key={idx}
+//             className="bg-sky-500"
+//             style={{
+//               height: `${value}px`,
+//               width: "15px"
+//             }}
+//           />
+
+//         ))}
+
+//       </div>
+
+//     </div>
+
+//   )
+
+// }
+
+// export default AlgorithmVisualizer
+
+
+
+// import React, { useState } from "react"
+
+// class Node {
+//   value: number
+//   left: Node | null
+//   right: Node | null
+
+//   constructor(value: number) {
+//     this.value = value
+//     this.left = null
+//     this.right = null
+//   }
+// }
+
+// const BSTVisualizer = () => {
+
+//   const [root, setRoot] = useState<Node | null>(null)
+//   const [input, setInput] = useState("")
+//   const [traversal, setTraversal] = useState<number[]>([])
+
+//   const insertNode = (node: Node | null, value: number): Node => {
+
+//     if (!node) return new Node(value)
+
+//     if (value < node.value)
+//       node.left = insertNode(node.left, value)
+//     else
+//       node.right = insertNode(node.right, value)
+
+//     return node
+//   }
+
+//   const deleteNode = (node: Node | null, value: number): Node | null => {
+
+//     if (!node) return null
+
+//     if (value < node.value) {
+//       node.left = deleteNode(node.left, value)
+//       return node
+//     }
+
+//     if (value > node.value) {
+//       node.right = deleteNode(node.right, value)
+//       return node
+//     }
+
+//     if (!node.left && !node.right) return null
+
+//     if (!node.left) return node.right
+//     if (!node.right) return node.left
+
+//     let successor = node.right
+//     while (successor.left) successor = successor.left
+
+//     node.value = successor.value
+//     node.right = deleteNode(node.right, successor.value)
+
+//     return node
+//   }
+
+//   const inorderTraversal = (node: Node | null, arr: number[]) => {
+
+//     if (!node) return
+
+//     inorderTraversal(node.left, arr)
+//     arr.push(node.value)
+//     inorderTraversal(node.right, arr)
+//   }
+
+//   const handleInsert = () => {
+
+//     if (!input) return
+
+//     const value = Number(input)
+
+//     const newRoot = insertNode(root, value)
+
+//     setRoot({ ...newRoot })
+//     setInput("")
+//   }
+
+//   const handleDelete = () => {
+
+//     if (!input) return
+
+//     const value = Number(input)
+
+//     const newRoot = deleteNode(root, value)
+
+//     setRoot(newRoot ? { ...newRoot } : null)
+//     setInput("")
+//   }
+
+//   const handleInorder = () => {
+
+//     const arr: number[] = []
+
+//     inorderTraversal(root, arr)
+
+//     setTraversal(arr)
+//   }
+
+//   const generateRandom = () => {
+
+//     let r: Node | null = null
+
+//     for (let i = 0; i < 6; i++) {
+
+//       const val = Math.floor(Math.random() * 100)
+
+//       r = insertNode(r, val)
+
+//     }
+
+//     setRoot(r ? { ...r } : null)
+//     setTraversal([])
+//   }
+
+//   const renderTree = (node: Node | null) => {
+
+//     if (!node) return null
+
+//     return (
+
+//       <div className="flex flex-col items-center">
+
+//         <div className="bg-sky-500 text-black font-bold w-12 h-12 flex items-center justify-center rounded-full">
+//           {node.value}
+//         </div>
+
+//         <div className="flex gap-10 mt-4">
+
+//           <div>{renderTree(node.left)}</div>
+//           <div>{renderTree(node.right)}</div>
+
+//         </div>
+
+//       </div>
+
+//     )
+//   }
+
+//   return (
+
+//     <div className="min-h-screen bg-black text-white flex flex-col items-center p-10">
+
+//       <h1 className="text-6xl font-black mb-8">
+//         BST <span className="text-sky-500">Visualizer</span>
+//       </h1>
+
+//       {/* Controls */}
+
+//       <div className="flex gap-4 mb-6">
+
+//         <input
+//           type="number"
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="Enter number"
+//           className="px-4 py-2 text-black rounded"
+//         />
+
+//         <button
+//           onClick={handleInsert}
+//           className="bg-green-600 px-4 py-2 rounded"
+//         >
+//           Insert
+//         </button>
+
+//         <button
+//           onClick={handleDelete}
+//           className="bg-red-600 px-4 py-2 rounded"
+//         >
+//           Delete
+//         </button>
+
+//         <button
+//           onClick={handleInorder}
+//           className="bg-blue-600 px-4 py-2 rounded"
+//         >
+//           Inorder
+//         </button>
+
+//         <button
+//           onClick={generateRandom}
+//           className="bg-purple-600 px-4 py-2 rounded"
+//         >
+//           Random Tree
+//         </button>
+
+//       </div>
+
+//       {/* Tree */}
+
+//       <div className="mt-10">{renderTree(root)}</div>
+
+//       {/* Traversal */}
+
+//       {traversal.length > 0 && (
+
+//         <div className="mt-10 text-xl">
+
+//           Inorder Traversal:
+
+//           <div className="mt-2 text-sky-400">
+//             {traversal.join(" → ")}
+//           </div>
+
+//         </div>
+
+//       )}
+
+//     </div>
+//   )
+// }
+
+// export default BSTVisualizer
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react"
+
+// const SortingVisualizer = () => {
+
+//   const [array, setArray] = useState<number[]>([])
+//   const [input, setInput] = useState("")
+//   const [speed, setSpeed] = useState(150)
+
+//   const sleep = (ms: number) =>
+//     new Promise(resolve => setTimeout(resolve, ms))
+
+
+//   /* RANDOM ARRAY */
+
+//   const generateArray = () => {
+
+//     let arr: number[] = []
+
+//     for (let i = 0; i < 20; i++) {
+//       arr.push(Math.floor(Math.random() * 100) + 10)
+//     }
+
+//     setArray(arr)
+//   }
+
+
+//   /* INSERT NUMBER */
+
+//   const insertNumber = () => {
+
+//     if (!input) return
+
+//     setArray([...array, Number(input)])
+//     setInput("")
+//   }
+
+
+//   /* DELETE NUMBER */
+
+//   const deleteNumber = () => {
+
+//     if (!input) return
+
+//     const val = Number(input)
+
+//     const newArr = array.filter(n => n !== val)
+
+//     setArray(newArr)
+//     setInput("")
+//   }
+
+
+
+//   /* ================= BUBBLE SORT ================= */
+
+//   const bubbleSort = async () => {
+
+//     let arr = [...array]
+
+//     for (let i = 0; i < arr.length; i++) {
+
+//       for (let j = 0; j < arr.length - i - 1; j++) {
+
+//         if (arr[j] > arr[j + 1]) {
+
+//           let temp = arr[j]
+//           arr[j] = arr[j + 1]
+//           arr[j + 1] = temp
+
+//           setArray([...arr])
+//           await sleep(speed)
+
+//         }
+
+//       }
+
+//     }
+
+//   }
+
+
+
+//   /* ================= QUICK SORT ================= */
+
+//   const quickSort = async () => {
+
+//     let arr = [...array]
+
+//     const partition = async (low: number, high: number) => {
+
+//       let pivot = arr[high]
+//       let i = low - 1
+
+//       for (let j = low; j < high; j++) {
+
+//         if (arr[j] < pivot) {
+
+//           i++
+
+//           let temp = arr[i]
+//           arr[i] = arr[j]
+//           arr[j] = temp
+
+//           setArray([...arr])
+//           await sleep(speed)
+
+//         }
+
+//       }
+
+//       let temp = arr[i + 1]
+//       arr[i + 1] = arr[high]
+//       arr[high] = temp
+
+//       setArray([...arr])
+//       await sleep(speed)
+
+//       return i + 1
+//     }
+
+//     const sort = async (low: number, high: number) => {
+
+//       if (low < high) {
+
+//         const pi = await partition(low, high)
+
+//         await sort(low, pi - 1)
+//         await sort(pi + 1, high)
+
+//       }
+
+//     }
+
+//     await sort(0, arr.length - 1)
+
+//   }
+
+
+
+//   /* ================= MERGE SORT ================= */
+
+//   const mergeSort = async () => {
+
+//     let arr = [...array]
+
+//     const merge = async (l: number, m: number, r: number) => {
+
+//       let left = arr.slice(l, m + 1)
+//       let right = arr.slice(m + 1, r + 1)
+
+//       let i = 0
+//       let j = 0
+//       let k = l
+
+//       while (i < left.length && j < right.length) {
+
+//         if (left[i] <= right[j]) {
+//           arr[k++] = left[i++]
+//         } else {
+//           arr[k++] = right[j++]
+//         }
+
+//         setArray([...arr])
+//         await sleep(speed)
+//       }
+
+//       while (i < left.length) {
+//         arr[k++] = left[i++]
+//         setArray([...arr])
+//         await sleep(speed)
+//       }
+
+//       while (j < right.length) {
+//         arr[k++] = right[j++]
+//         setArray([...arr])
+//         await sleep(speed)
+//       }
+
+//     }
+
+//     const sort = async (l: number, r: number) => {
+
+//       if (l >= r) return
+
+//       const m = Math.floor((l + r) / 2)
+
+//       await sort(l, m)
+//       await sort(m + 1, r)
+
+//       await merge(l, m, r)
+
+//     }
+
+//     await sort(0, arr.length - 1)
+
+//   }
+
+
+
+//   return (
+
+//     <div className="min-h-screen bg-black text-white flex flex-col items-center p-10">
+
+//       <h1 className="text-6xl font-black mb-10">
+//         Sorting <span className="text-purple-500">Visualizer</span>
+//       </h1>
+
+
+//       {/* INPUT CONTROLS */}
+
+//       <div className="flex gap-4 mb-6">
+
+//         <input
+//           type="number"
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="Enter number"
+//           className="px-4 py-2 text-purple-400 rounded"
+//         />
+
+//         <button
+//           onClick={insertNumber}
+//           className="bg-green-600 px-4 py-2 rounded"
+//         >
+//           Insert
+//         </button>
+
+//         <button
+//           onClick={deleteNumber}
+//           className="bg-red-600 px-4 py-2 rounded"
+//         >
+//           Delete
+//         </button>
+
+//         <button
+//           onClick={generateArray}
+//           className="bg-purple-600 px-4 py-2 rounded"
+//         >
+//           Random Array
+//         </button>
+
+//       </div>
+
+
+
+//       {/* SORT BUTTONS */}
+
+//       <div className="flex gap-4 mb-6">
+
+//         <button
+//           onClick={bubbleSort}
+//           className="bg-blue-600 px-4 py-2 rounded"
+//         >
+//           Bubble Sort
+//         </button>
+
+//         <button
+//           onClick={quickSort}
+//           className="bg-green-600 px-4 py-2 rounded"
+//         >
+//           Quick Sort
+//         </button>
+
+//         <button
+//           onClick={mergeSort}
+//           className="bg-yellow-500 px-4 py-2 rounded"
+//         >
+//           Merge Sort
+//         </button>
+
+//       </div>
+
+
+
+//       {/* SPEED CONTROL */}
+
+//       <div className="mb-10">
+
+//         <label className="mr-4">Speed</label>
+
+//         <input
+//           type="range"
+//           min="10"
+//           max="500"
+//           value={speed}
+//           onChange={(e) => setSpeed(Number(e.target.value))}
+//         />
+
+//       </div>
+
+
+
+//       {/* ARRAY BARS */}
+
+//       <div className="flex items-end gap-2 h-[300px]">
+
+//         {array.map((value, idx) => (
+
+//           <div
+//             key={idx}
+//             className="bg-sky-500 w-8 flex items-end justify-center text-xs"
+//             style={{ height: `${value * 2}px` }}
+//           >
+//             {value}
+//           </div>
+
+//         ))}
+
+//       </div>
+
+//     </div>
+
+//   )
+
+// }
+
+// export default SortingVisualizer
+
+
+
+
+import React, { useState } from "react"
+import Lightning from "../components/Lightning"
+
+const SortingVisualizer = () => {
+
+  const [array, setArray] = useState<number[]>([])
+  const [input, setInput] = useState("")
+  const [speed, setSpeed] = useState(150)
+
+  const sleep = (ms: number) =>
+    new Promise(resolve => setTimeout(resolve, ms))
+
+
+  /* RANDOM ARRAY */
+const generateArray = () => {
+
+  // clear old array first
+  setArray([])
+
+  setTimeout(() => {
+
+    const newArray: number[] = []
+
+    for (let i = 0; i < 20; i++) {
+      newArray.push(Math.floor(Math.random() * 100) + 10)
+    }
+
+    setArray(newArray)
+
+  }, 50)
+
+}
+  // const generateArray = () => {
+
+  //   let arr: number[] = []
+
+  //   for (let i = 0; i < 20; i++) {
+  //     arr.push(Math.floor(Math.random() * 100) + 10)
+  //   }
+
+  //   setArray(arr)
+  // }
+
+
+  /* INSERT NUMBER */
+
+  const insertNumber = () => {
+
+    if (!input) return
+
+    setArray([...array, Number(input)])
+    setInput("")
+  }
+
+
+  /* DELETE NUMBER */
+
+  const deleteNumber = () => {
+
+    if (!input) return
+
+    const val = Number(input)
+
+    const newArr = array.filter(n => n !== val)
+
+    setArray(newArr)
+    setInput("")
+  }
+
+
+
+  /* ================= BUBBLE SORT ================= */
+
+  const bubbleSort = async () => {
+
+    let arr = [...array]
+
+    for (let i = 0; i < arr.length; i++) {
+
+      for (let j = 0; j < arr.length - i - 1; j++) {
+
+        if (arr[j] > arr[j + 1]) {
+
+          let temp = arr[j]
+          arr[j] = arr[j + 1]
+          arr[j + 1] = temp
+
+          setArray([...arr])
+          await sleep(speed)
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+  /* ================= QUICK SORT ================= */
+
+  const quickSort = async () => {
+
+    let arr = [...array]
+
+    const partition = async (low: number, high: number) => {
+
+      let pivot = arr[high]
+      let i = low - 1
+
+      for (let j = low; j < high; j++) {
+
+        if (arr[j] < pivot) {
+
+          i++
+
+          let temp = arr[i]
+          arr[i] = arr[j]
+          arr[j] = temp
+
+          setArray([...arr])
+          await sleep(speed)
+
+        }
+
+      }
+
+      let temp = arr[i + 1]
+      arr[i + 1] = arr[high]
+      arr[high] = temp
+
+      setArray([...arr])
+      await sleep(speed)
+
+      return i + 1
+    }
+
+    const sort = async (low: number, high: number) => {
+
+      if (low < high) {
+
+        const pi = await partition(low, high)
+
+        await sort(low, pi - 1)
+        await sort(pi + 1, high)
+
+      }
+
+    }
+
+    await sort(0, arr.length - 1)
+
+  }
+
+
+
+  /* ================= MERGE SORT ================= */
+
+  const mergeSort = async () => {
+
+    let arr = [...array]
+
+    const merge = async (l: number, m: number, r: number) => {
+
+      let left = arr.slice(l, m + 1)
+      let right = arr.slice(m + 1, r + 1)
+
+      let i = 0
+      let j = 0
+      let k = l
+
+      while (i < left.length && j < right.length) {
+
+        if (left[i] <= right[j]) {
+          arr[k++] = left[i++]
+        } else {
+          arr[k++] = right[j++]
+        }
+
+        setArray([...arr])
+        await sleep(speed)
+      }
+
+      while (i < left.length) {
+        arr[k++] = left[i++]
+        setArray([...arr])
+        await sleep(speed)
+      }
+
+      while (j < right.length) {
+        arr[k++] = right[j++]
+        setArray([...arr])
+        await sleep(speed)
+      }
+
+    }
+
+    const sort = async (l: number, r: number) => {
+
+      if (l >= r) return
+
+      const m = Math.floor((l + r) / 2)
+
+      await sort(l, m)
+      await sort(m + 1, r)
+
+      await merge(l, m, r)
+
+    }
+
+    await sort(0, arr.length - 1)
+
+  }
+
+
 
   return (
+
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
 
-      {/* ================= LIGHTNING BACKGROUND ================= */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* LIGHTNING BACKGROUND */}
 
+      <div className="fixed inset-0 pointer-events-none z-0">
+
+        {/* Lightning */}
         <div className="absolute inset-0">
           <Lightning
             hue={266}
             xOffset={-0.1}
-           speed={1.5}
+            speed={1.5}
             intensity={2}
             size={1}
           />
         </div>
 
-        {/* Glow Effects */}
+        {/* Glow */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
+
       </div>
 
-      {/* ================= MAIN CONTENT ================= */}
-      <section className="relative z-10 pt-0 pb-24 px-6 lg:px-24 border-t border-white/5">
 
-        <div className="max-w-7xl mx-auto">
 
-          {/* Header */}
-          <div className="text-center mb-16 space-y-6">
-            <div className="flex justify-center mb-4">
-              <div className="w-20 h-20 rounded-full bg-purple-600/10 border border-purple-500/30 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-            </div>
+      {/* MAIN CONTENT */}
 
-            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none">
-              Quiz <span className="text-purple-500">Scores</span>
-            </h2>
+      <div className="relative z-10 flex flex-col items-center p-10">
 
-            <p className="text-white/40 max-w-xl mx-auto text-lg leading-relaxed">
-              Track your learning progress and compare your performance across different programming languages.
-            </p>
-          </div>
+        <h1 className="text-6xl font-black mb-10">
+          Sorting <span className="text-purple-500">Visualizer</span>
+        </h1>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {stats.map((stat, idx) => (
-              <div
-                key={idx}
-                className="bg-[#0a0a0a] border border-white/5 p-8 group hover:border-purple-500/40 transition-all relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 p-3 text-[8px] text-white/10 uppercase tracking-widest">
-                  METRIC_0{idx + 1}
-                </div>
 
-                <div className="space-y-4">
-                  <div className="w-12 h-12 border border-white/10 flex items-center justify-center text-xl">
-                    {stat.icon}
-                  </div>
+        {/* INPUT CONTROLS */}
 
-                  <div className="space-y-1">
-                    <div className="text-4xl font-black tracking-tighter">
-                      {stat.value}
-                    </div>
-                    <div className="text-[10px] uppercase text-white/30 tracking-widest">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
+        <div className="flex gap-4 mb-6">
 
-                <div className="absolute bottom-0 left-0 h-1 bg-purple-600/20 w-8 group-hover:w-full transition-all duration-500"></div>
-              </div>
-            ))}
-          </div>
+          <input
+            type="number"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Enter number"
+            className="px-4 py-2 text-purple-400 rounded bg-black border border-white/20"
+          />
 
-          {/* Empty Dashboard */}
-          <div className="bg-[#050505] border border-white/10 min-h-[450px] flex flex-col items-center justify-center text-center p-12 relative overflow-hidden">
+          <button
+            onClick={insertNumber}
+            className="bg-green-600 px-4 py-2 rounded"
+          >
+            Insert
+          </button>
 
-            <div className="space-y-8">
-              <div className="w-24 h-24 rounded-full bg-purple-600/[0.03] border border-white/5 flex items-center justify-center mx-auto mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-12 w-12 text-white/10"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  />
-                </svg>
-              </div>
+          <button
+            onClick={deleteNumber}
+            className="bg-red-600 px-4 py-2 rounded"
+          >
+            Delete
+          </button>
 
-              <div>
-                <h3 className="text-3xl font-black uppercase tracking-tighter">
-                  No Scores Found
-                </h3>
-                <p className="text-white/30 italic">
-                  Take your first quiz to see your scores here!
-                </p>
-              </div>
-            </div>
-          </div>
+          <button
+            onClick={generateArray}
+            className="bg-purple-600 px-4 py-2 rounded"
+          >
+            Random Array
+          </button>
 
         </div>
-      </section>
+
+
+
+        {/* SORT BUTTONS */}
+
+        <div className="flex gap-4 mb-6">
+
+          <button
+            onClick={bubbleSort}
+            className="bg-blue-600 px-4 py-2 rounded"
+          >
+            Bubble Sort
+          </button>
+
+          <button
+            onClick={quickSort}
+            className="bg-green-600 px-4 py-2 rounded"
+          >
+            Quick Sort
+          </button>
+
+          <button
+            onClick={mergeSort}
+            className="bg-yellow-500 px-4 py-2 rounded"
+          >
+            Merge Sort
+          </button>
+
+        </div>
+
+
+
+        {/* SPEED CONTROL */}
+
+        <div className="mb-10">
+
+          <label className="mr-4">Speed</label>
+
+          <input
+            type="range"
+            min="10"
+            max="500"
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+
+        </div>
+
+
+
+        {/* ARRAY BARS */}
+
+        <div className="flex items-end gap-2 h-[300px]">
+
+          {array.map((value, idx) => (
+
+            <div
+              key={idx}
+              className="bg-sky-500 w-8 flex items-end justify-center text-xs rounded"
+              style={{ height: `${value * 2}px` }}
+            >
+              {value}
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
     </div>
+
   )
+
 }
 
-export default Scores
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default SortingVisualizer
 
 
 
