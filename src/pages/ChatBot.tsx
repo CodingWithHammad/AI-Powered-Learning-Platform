@@ -1016,9 +1016,6 @@
 
 
 
-
-
-
 import React, { useState, useRef, useEffect } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { Link } from 'react-router-dom'

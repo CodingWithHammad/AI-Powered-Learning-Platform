@@ -754,13 +754,261 @@
 
 
 
-import { VapiControls } from "@/components/ui/vapi";
+// import { VapiControls } from "@/components/ui/vapi";
+
+// import { useState, useRef, useEffect } from "react";
+// import { useAuth } from "@clerk/clerk-react";
+// import { Link } from "react-router-dom";
+// import { Mic, MicOff, Phone, PhoneOff, Volume2 } from "lucide-react";
+// import VapiClient from "@vapi-ai/web"; // ✅ Import official SDK
+
+// interface TranscriptMessage {
+//   id: string;
+//   content: string;
+//   isUser: boolean;
+//   timestamp: Date;
+// }
+
+// const VapiAgent = () => {
+//   const { isSignedIn } = useAuth();
+//   const [isConnected, setIsConnected] = useState(false);
+//   const [isListening, setIsListening] = useState(false);
+//   const [transcript, setTranscript] = useState<TranscriptMessage[]>([]);
+//   const [connectionStatus, setConnectionStatus] = useState<
+//     "idle" | "connecting" | "connected" | "disconnected"
+//   >("idle");
+
+//   const transcriptEndRef = useRef<HTMLDivElement>(null);
+//   const vapi = useRef<any>(null);
+
+//   // Replace with your real key
+//   const VAPI_API_KEY = import.meta.env.VITE_VAPI_API_KEY;
+
+//   useEffect(() => {
+//     if (!vapi.current) {
+//       vapi.current = new VapiClient(VAPI_API_KEY);
+//       console.log("✅ Vapi initialized");
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//   }, [transcript]);
+
+//   const startVoiceSession = async () => {
+//     try {
+//       setConnectionStatus("connecting");
+//       console.log("🎤 Starting session...");
+
+//       const response = await vapi.current.startSession({
+//         agentId: "cc26afab-346c-47c0-94e5-83d5435bd114", // ⚠️ Replace with your Vapi agent ID
+//         voice: "alloy", // or any other supported voice
+//         transcribe: true,
+//       });
+
+//       console.log("✅ Session started:", response);
+//       setIsConnected(true);
+//       setConnectionStatus("connected");
+//       setIsListening(true);
+
+//       // Listen for transcript updates
+//       vapi.current.on("transcript", (msg: any) => {
+//         setTranscript((prev) => [
+//           ...prev,
+//           {
+//             id: Date.now().toString(),
+//             content: msg.text,
+//             isUser: msg.isUser,
+//             timestamp: new Date(),
+//           },
+//         ]);
+//       });
+//     } catch (err) {
+//       console.error("❌ Error connecting to Vapi:", err);
+//       setConnectionStatus("disconnected");
+//     }
+//   };
+
+//   const endVoiceSession = () => {
+//     vapi.current?.stopSession();
+//     console.log("🛑 Voice session ended");
+//     setIsConnected(false);
+//     setIsListening(false);
+//     setConnectionStatus("idle");
+//   };
+
+//   const getStatusColor = () => {
+//     switch (connectionStatus) {
+//       case "connecting":
+//         return "text-yellow-400";
+//       case "connected":
+//         return "text-green-400";
+//       case "disconnected":
+//         return "text-red-400";
+//       default:
+//         return "text-gray-400";
+//     }
+//   };
+
+//   const getStatusText = () => {
+//     switch (connectionStatus) {
+//       case "connecting":
+//         return "Connecting...";
+//       case "connected":
+//         return "Connected";
+//       case "disconnected":
+//         return "Disconnected";
+//       default:
+//         return "Ready to connect";
+//     }
+//   };
+
+//   if (!isSignedIn) {
+//     return (
+//       <div className="min-h-screen flex items-center justify-center">
+//         <div className="text-center max-w-md mx-auto p-8">
+//           <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-8 rounded-full border border-purple-500/30 w-32 h-32 mx-auto flex items-center justify-center mb-8">
+//             <Mic className="w-16 h-16 text-purple-400" />
+//           </div>
+//           <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+//             Sign In Required
+//           </h1>
+//           <p className="text-gray-300 mb-6">
+//             Please sign in to access the AI voice assistant.
+//           </p>
+//           <Link
+//             to="/sign-up"
+//             className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+//           >
+//             Get Started
+//           </Link>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="min-h-screen">
+//       <section className="container mx-auto px-6 py-20">
+//         <div className="text-center mb-16">
+//           <div className="flex justify-center mb-8">
+//             <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-full border border-purple-500/30">
+//               <Mic className="w-12 h-12 text-purple-400" />
+//             </div>
+//           </div>
+
+//           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+//             AI Voice Assistant
+//           </h1>
+
+//           <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+//             Have natural conversations with our AI voice assistant. Ask
+//             programming questions, get explanations, and learn through
+//             interactive voice sessions.
+//           </p>
+//         </div>
+
+//         <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20">
+//           <VapiControls />
+//           <div className="flex flex-col items-center space-y-6">
+//             {/* Status */}
+//             <div className="text-center">
+//               <div className={`text-lg font-semibold ${getStatusColor()}`}>
+//                 {getStatusText()}
+//               </div>
+//             </div>
+
+//             {/* Control Button */}
+//             <div className="relative">
+//               {!isConnected ? (
+//                 <button
+//                   onClick={startVoiceSession}
+//                   disabled={connectionStatus === "connecting"}
+//                   className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-8 rounded-full hover:scale-105 transition"
+//                 >
+//                   <Phone className="w-12 h-12" />
+//                 </button>
+//               ) : (
+//                 <button
+//                   onClick={endVoiceSession}
+//                   className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-8 rounded-full hover:scale-105 transition"
+//                 >
+//                   <PhoneOff className="w-12 h-12" />
+//                 </button>
+//               )}
+//               {isListening && (
+//                 <div className="absolute -inset-4 border-4 border-green-400 rounded-full animate-ping"></div>
+//               )}
+//             </div>
+
+//             {isConnected && (
+//               <div className="flex items-center space-x-4">
+//                 <div className="flex items-center space-x-2 bg-black/20 px-4 py-2 rounded-lg">
+//                   {isListening ? (
+//                     <Mic className="w-5 h-5 text-green-400" />
+//                   ) : (
+//                     <MicOff className="w-5 h-5 text-red-400" />
+//                   )}
+//                   <span className="text-sm text-gray-300">
+//                     {isListening ? "Listening" : "Muted"}
+//                   </span>
+//                 </div>
+//                 <div className="flex items-center space-x-2 bg-black/20 px-4 py-2 rounded-lg">
+//                   <Volume2 className="w-5 h-5 text-blue-400" />
+//                   <span className="text-sm text-gray-300">Audio Active</span>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Transcript */}
+//           {transcript.length > 0 && (
+//             <div className="mt-8 p-6 border border-purple-500/20 rounded-xl bg-black/20 max-h-96 overflow-y-auto">
+//               {transcript.map((msg) => (
+//                 <div
+//                   key={msg.id}
+//                   className={`flex mb-4 ${
+//                     msg.isUser ? "justify-end" : "justify-start"
+//                   }`}
+//                 >
+//                   <div
+//                     className={`max-w-[80%] rounded-lg p-4 ${
+//                       msg.isUser
+//                         ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+//                         : "bg-black/30 text-gray-100"
+//                     }`}
+//                   >
+//                     <p className="text-sm">{msg.content}</p>
+//                   </div>
+//                 </div>
+//               ))}
+//               <div ref={transcriptEndRef} />
+//             </div>
+//           )}
+//         </div>
+//       </section>
+//     </div>
+//   );
+// };
+
+// export default VapiAgent;
+
+
+
+
+
+
+
+
+
+
 
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
-import { Mic, MicOff, Phone, PhoneOff, Volume2 } from "lucide-react";
-import VapiClient from "@vapi-ai/web"; // ✅ Import official SDK
+import { Mic, MicOff, Volume2 } from "lucide-react";
+import VapiClient from "@vapi-ai/web";
+import { VapiControls } from "@/components/ui/vapi";
 
 interface TranscriptMessage {
   id: string;
@@ -771,6 +1019,7 @@ interface TranscriptMessage {
 
 const VapiAgent = () => {
   const { isSignedIn } = useAuth();
+
   const [isConnected, setIsConnected] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState<TranscriptMessage[]>([]);
@@ -781,15 +1030,14 @@ const VapiAgent = () => {
   const transcriptEndRef = useRef<HTMLDivElement>(null);
   const vapi = useRef<any>(null);
 
-  // Replace with your real key
   const VAPI_API_KEY = import.meta.env.VITE_VAPI_API_KEY;
 
   useEffect(() => {
-    if (!vapi.current) {
+    if (!vapi.current && VAPI_API_KEY) {
       vapi.current = new VapiClient(VAPI_API_KEY);
       console.log("✅ Vapi initialized");
     }
-  }, []);
+  }, [VAPI_API_KEY]);
 
   useEffect(() => {
     transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -798,20 +1046,19 @@ const VapiAgent = () => {
   const startVoiceSession = async () => {
     try {
       setConnectionStatus("connecting");
-      console.log("🎤 Starting session...");
 
       const response = await vapi.current.startSession({
-        agentId: "YOUR_AGENT_ID", // ⚠️ Replace with your Vapi agent ID
-        voice: "alloy", // or any other supported voice
+        agentId: "cc26afab-346c-47c0-94e5-83d5435bd114",
+        voice: "alloy",
         transcribe: true,
       });
 
-      console.log("✅ Session started:", response);
-      setIsConnected(true);
-      setConnectionStatus("connected");
-      setIsListening(true);
+      console.log("Session started:", response);
 
-      // Listen for transcript updates
+      setIsConnected(true);
+      setIsListening(true);
+      setConnectionStatus("connected");
+
       vapi.current.on("transcript", (msg: any) => {
         setTranscript((prev) => [
           ...prev,
@@ -823,18 +1070,20 @@ const VapiAgent = () => {
           },
         ]);
       });
-    } catch (err) {
-      console.error("❌ Error connecting to Vapi:", err);
+    } catch (error) {
+      console.error("Vapi error:", error);
       setConnectionStatus("disconnected");
     }
   };
 
   const endVoiceSession = () => {
     vapi.current?.stopSession();
-    console.log("🛑 Voice session ended");
+
     setIsConnected(false);
     setIsListening(false);
     setConnectionStatus("idle");
+
+    console.log("Session ended");
   };
 
   const getStatusColor = () => {
@@ -867,18 +1116,17 @@ const VapiAgent = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md mx-auto p-8">
-          <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-8 rounded-full border border-purple-500/30 w-32 h-32 mx-auto flex items-center justify-center mb-8">
-            <Mic className="w-16 h-16 text-purple-400" />
-          </div>
-          <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold mb-4 text-white">
             Sign In Required
           </h1>
+
           <p className="text-gray-300 mb-6">
             Please sign in to access the AI voice assistant.
           </p>
+
           <Link
             to="/sign-up"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+            className="bg-purple-600 text-white px-6 py-3 rounded-lg"
           >
             Get Started
           </Link>
@@ -890,80 +1138,61 @@ const VapiAgent = () => {
   return (
     <div className="min-h-screen">
       <section className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-8">
-            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-full border border-purple-500/30">
-              <Mic className="w-12 h-12 text-purple-400" />
-            </div>
-          </div>
 
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-white">
             AI Voice Assistant
           </h1>
 
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Have natural conversations with our AI voice assistant. Ask
-            programming questions, get explanations, and learn through
-            interactive voice sessions.
+          <p className="text-gray-300 mt-4">
+            Talk with AI and ask programming questions.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 rounded-xl border border-purple-500/20">
-          <VapiControls />
-          <div className="flex flex-col items-center space-y-6">
-            {/* Status */}
-            <div className="text-center">
-              <div className={`text-lg font-semibold ${getStatusColor()}`}>
-                {getStatusText()}
-              </div>
-            </div>
+        <div className="max-w-3xl mx-auto bg-black/30 p-8 rounded-xl border border-purple-500/20">
 
-            {/* Control Button */}
-            <div className="relative">
-              {!isConnected ? (
-                <button
-                  onClick={startVoiceSession}
-                  disabled={connectionStatus === "connecting"}
-                  className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-8 rounded-full hover:scale-105 transition"
-                >
-                  <Phone className="w-12 h-12" />
-                </button>
-              ) : (
-                <button
-                  onClick={endVoiceSession}
-                  className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-8 rounded-full hover:scale-105 transition"
-                >
-                  <PhoneOff className="w-12 h-12" />
-                </button>
-              )}
-              {isListening && (
-                <div className="absolute -inset-4 border-4 border-green-400 rounded-full animate-ping"></div>
-              )}
+          <div className="text-center mb-6">
+            <div className={`text-lg font-semibold ${getStatusColor()}`}>
+              {getStatusText()}
             </div>
-
-            {isConnected && (
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2 bg-black/20 px-4 py-2 rounded-lg">
-                  {isListening ? (
-                    <Mic className="w-5 h-5 text-green-400" />
-                  ) : (
-                    <MicOff className="w-5 h-5 text-red-400" />
-                  )}
-                  <span className="text-sm text-gray-300">
-                    {isListening ? "Listening" : "Muted"}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2 bg-black/20 px-4 py-2 rounded-lg">
-                  <Volume2 className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm text-gray-300">Audio Active</span>
-                </div>
-              </div>
-            )}
           </div>
+
+          {/* Controls */}
+          <VapiControls
+            isConnected={isConnected}
+            isListening={isListening}
+            onStart={startVoiceSession}
+            onStop={endVoiceSession}
+          />
+
+          {isConnected && (
+            <div className="flex justify-center mt-6 space-x-4">
+
+              <div className="flex items-center space-x-2 bg-black/30 px-4 py-2 rounded-lg">
+                {isListening ? (
+                  <Mic className="w-5 h-5 text-green-400" />
+                ) : (
+                  <MicOff className="w-5 h-5 text-red-400" />
+                )}
+                <span className="text-sm text-gray-300">
+                  {isListening ? "Listening" : "Muted"}
+                </span>
+              </div>
+
+              <div className="flex items-center space-x-2 bg-black/30 px-4 py-2 rounded-lg">
+                <Volume2 className="w-5 h-5 text-blue-400" />
+                <span className="text-sm text-gray-300">
+                  Audio Active
+                </span>
+              </div>
+
+            </div>
+          )}
 
           {/* Transcript */}
           {transcript.length > 0 && (
             <div className="mt-8 p-6 border border-purple-500/20 rounded-xl bg-black/20 max-h-96 overflow-y-auto">
+
               {transcript.map((msg) => (
                 <div
                   key={msg.id}
@@ -971,20 +1200,25 @@ const VapiAgent = () => {
                     msg.isUser ? "justify-end" : "justify-start"
                   }`}
                 >
+
                   <div
                     className={`max-w-[80%] rounded-lg p-4 ${
                       msg.isUser
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                        : "bg-black/30 text-gray-100"
+                        ? "bg-purple-600 text-white"
+                        : "bg-black/40 text-gray-200"
                     }`}
                   >
                     <p className="text-sm">{msg.content}</p>
                   </div>
+
                 </div>
               ))}
+
               <div ref={transcriptEndRef} />
+
             </div>
           )}
+
         </div>
       </section>
     </div>

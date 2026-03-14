@@ -678,7 +678,7 @@ const Layout = () => {
     { name: 'DSA Lab', path: '/scores', icon: 'M4 7h16M4 12h16M4 17h16' },
     { name: 'Chatbot', path: '/chatbot', icon: 'M8 10h.01M12 10h.01M16 10h.01M5 20l5-5h9a2 2 0 002-2V5' },
     { name: 'Library', path: '/library', icon: 'M4 19h16M4 4h16M4 9h16M4 14h16' },
-    { name: 'Voice Agent', path: '/voice-agent', icon: 'M12 1v11m0 0a3 3 0 003-3V5a3 3 0 10-6 0v4a3 3 0 003 3z' },
+    { name: 'Vapi Agent', path: '/vapiagent', icon: 'M12 1v11m0 0a3 3 0 003-3V5a3 3 0 10-6 0v4a3 3 0 003 3z' },
     { name: 'Mini Projects', path: '/mini-projects', icon: 'M12 20h9' }
   ]
 

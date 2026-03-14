@@ -12,7 +12,7 @@ import Library from './pages/Library'
 import SignInPage from './pages/sign-in'
 import SignUpPage from './pages/sign-up'
 import VapiAgent from './pages/VapiAgent'
-import VoiceAgent from './pages/VoiceAgent'
+// import VoiceAgent from './pages/VoiceAgent'
 import MiniProjects from './pages/MiniProjects'
 import Lightning from '@/components/Lightning' // ⚡ Import Lightning
 
@@ -79,7 +79,7 @@ function App() {
               <Route path="chatbot" element={<ChatBot />} />
               <Route path="library" element={<Library />} />
               <Route path="vapi-agent" element={<VapiAgent />} />
-              <Route path="voice-agent" element={<VoiceAgent />} />
+              {/* <Route path="voice-agent" element={<VoiceAgent />} /> */}
               <Route path="mini-projects" element={<MiniProjects />} />
             </Route>
           </Routes>
