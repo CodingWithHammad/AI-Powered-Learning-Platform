@@ -669,18 +669,23 @@ const Layout = () => {
   const location = useLocation()
   const { isSignedIn } = useAuth()
 
-  const navLinks = [
-    { name: 'Home', path: '/', icon: 'M3 12l2-2 7-7 7 7M5 10v10h3m10-11l2 2v10h-3m-6 0h6' },
-    { name: 'About', path: '/about', icon: 'M12 4a4 4 0 110 8 4 4 0 010-8zm0 10c-4 0-7 3-7 7h14c0-4-3-7-7-7z' },
-    { name: 'Contact', path: '/contact', icon: 'M3 8l9 6 9-6M5 19h14', special: true },
-    { name: 'Courses', path: '/courses', icon: 'M12 6v13M3 6v13M21 6v13' },
-    { name: 'Roadmap', path: '/roadmap', icon: 'M3 5l6 2 6-2 6 2v13l-6-2-6 2-6-2z' },
-    { name: 'DSA Lab', path: '/scores', icon: 'M4 7h16M4 12h16M4 17h16' },
-    { name: 'Chatbot', path: '/chatbot', icon: 'M8 10h.01M12 10h.01M16 10h.01M5 20l5-5h9a2 2 0 002-2V5' },
-    { name: 'Library', path: '/library', icon: 'M4 19h16M4 4h16M4 9h16M4 14h16' },
-    { name: 'Vapi Agent', path: '/vapiagent', icon: 'M12 1v11m0 0a3 3 0 003-3V5a3 3 0 10-6 0v4a3 3 0 003 3z' },
-    { name: 'Mini Projects', path: '/mini-projects', icon: 'M12 20h9' }
-  ]
+const navLinks = [
+  { name: 'Home', path: '/', icon: 'M3 12l2-2 7-7 7 7M5 10v10h3m10-11l2 2v10h-3m-6 0h6' },
+  { name: 'About', path: '/about', icon: 'M12 4a4 4 0 110 8 4 4 0 010-8zm0 10c-4 0-7 3-7 7h14c0-4-3-7-7-7z' },
+  { name: 'Contact', path: '/contact', icon: 'M3 8l9 6 9-6M5 19h14', special: true },
+  { name: 'Courses', path: '/courses', icon: 'M12 6v13M3 6v13M21 6v13' },
+  { name: 'Roadmap', path: '/roadmap', icon: 'M3 5l6 2 6-2 6 2v13l-6-2-6 2-6-2z' },
+
+  { name: 'DSA Lab', path: '/scores', icon: 'M4 7h16M4 12h16M4 17h16' },
+
+  // ✅ NEW AR PAGE (yahi add kiya hai)
+  { name: 'AR Viewer', path: '/ar', icon: 'M12 2L2 7l10 5 10-5-10-5zm0 7v13' },
+
+  { name: 'Chatbot', path: '/chatbot', icon: 'M8 10h.01M12 10h.01M16 10h.01M5 20l5-5h9a2 2 0 002-2V5' },
+  { name: 'Library', path: '/library', icon: 'M4 19h16M4 4h16M4 9h16M4 14h16' },
+  { name: 'Vapi Agent', path: '/vapiagent', icon: 'M12 1v11m0 0a3 3 0 003-3V5a3 3 0 10-6 0v4a3 3 0 003 3z' },
+  { name: 'Mini Projects', path: '/mini-projects', icon: 'M12 20h9' }
+]
 
   return (
 
