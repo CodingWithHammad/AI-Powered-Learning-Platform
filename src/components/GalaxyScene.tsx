@@ -105,9 +105,7 @@ const GalaxyScene = () => {
 
       renderer.render(scene, camera)
     }
-
     animate()
-
     return () => {
       mountRef.current?.removeChild(renderer.domElement)
     }

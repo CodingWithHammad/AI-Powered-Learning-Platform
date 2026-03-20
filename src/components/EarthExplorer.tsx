@@ -7,7 +7,7 @@ import * as THREE from "three"
 
 function Earth() {
   const ref: any = useRef()
-  const texture = new THREE.TextureLoader().load("@/public/textures/earth.jpg")
+  const texture = new THREE.TextureLoader().load("/textures/earth.jpg")
 
   useFrame(() => {
     ref.current.rotation.y += 0.001
