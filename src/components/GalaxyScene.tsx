@@ -108,9 +108,11 @@ const GalaxyScene = () => {
     animate()
     return () => {
       mountRef.current?.removeChild(renderer.domElement)
+    
     }
 
   }, [])
+
 
   return <div ref={mountRef} className="w-full h-screen" />
 }
