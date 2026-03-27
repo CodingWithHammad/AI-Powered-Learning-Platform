@@ -2,7 +2,7 @@
 "use client"
 
 import { useState } from "react"
-import SolarSystem from "@/components/GalaxyScene" // ✅ fixed
+import SolarSystem from "@/components/SolarSystem" // ✅ fixed
 import HeartViewer from "../components/HeartViewer"
 import EarthExplorer from "../components/EarthExplorer"
 import Lightning from "../components/Lightning" // 👈 IMPORT THIS
