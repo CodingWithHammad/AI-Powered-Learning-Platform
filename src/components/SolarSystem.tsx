@@ -810,6 +810,7 @@ export default function SolarSystem() {
         </button>
       </div>
 
+
       <div ref={mountRef} className="w-full h-[520px]" />
     </div>
   )
