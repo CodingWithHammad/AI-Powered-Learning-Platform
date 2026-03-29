@@ -1111,8 +1111,8 @@ const Chatbot: React.FC = () => {
 
           {/* Header */}
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
-              AI Programming Assistant
+            <h2 className="text-7xl md:text-6xl font-black uppercase tracking-tight">
+              AI Programming  <span className="text-purple-500"> Assistant</span>
             </h2>
 
             {!isSignedIn && (

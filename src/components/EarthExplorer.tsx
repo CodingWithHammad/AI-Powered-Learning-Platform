@@ -1,8 +1,221 @@
+// "use client"
+
+// import { Canvas, useFrame } from "@react-three/fiber"
+// import { OrbitControls, Stars } from "@react-three/drei"
+// import { Suspense, useRef } from "react"
+// import * as THREE from "three"
+
+// function Earth() {
+//   const ref: any = useRef()
+//   const texture = new THREE.TextureLoader().load("/textures/earth.jpg")
+
+//   useFrame(() => {
+//     ref.current.rotation.y += 0.001
+//   })
+
+//   return (
+//     <mesh ref={ref}>
+//       <sphereGeometry args={[2, 64, 64]} />
+//       <meshStandardMaterial map={texture} />
+//     </mesh>
+//   )
+// }
+
+// function Moon() {
+//   const ref: any = useRef()
+//   const texture = new THREE.TextureLoader().load("/textures/moon.jpg")
+
+//   useFrame(({ clock }) => {
+//     const t = clock.getElapsedTime()
+//     ref.current.position.x = Math.sin(t * 0.5) * 5
+//     ref.current.position.z = Math.cos(t * 0.5) * 5
+//   })
+
+//   return (
+//     <mesh ref={ref}>
+//       <sphereGeometry args={[0.5, 32, 32]} />
+//       <meshStandardMaterial map={texture} />
+//     </mesh>
+//   )
+// }
+
+// export default function EarthExplorer() {
+//   return (
+//     <div className="w-full h-screen bg-black">
+//       <Canvas camera={{ position: [0, 0, 7] }}>
+//         <ambientLight intensity={0.8} />
+//         <directionalLight position={[5, 3, 5]} intensity={2} />
+
+//         <Suspense fallback={null}>
+//           <Earth />
+//           <Moon />
+//         </Suspense>
+
+//         <Stars />
+//         <OrbitControls />
+//       </Canvas>
+//     </div>
+//   )
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client"
+
+// import { Canvas, useFrame } from "@react-three/fiber"
+// import { OrbitControls, Stars } from "@react-three/drei"
+// import { Suspense, useRef, useEffect } from "react"
+// import * as THREE from "three"
+
+// function Earth() {
+//   const ref: any = useRef()
+//   const texture = new THREE.TextureLoader().load("/textures/earth.jpg")
+
+//   useFrame(() => {
+//     ref.current.rotation.y += 0.001
+//   })
+
+//   return (
+//     <mesh ref={ref}>
+//       <sphereGeometry args={[2, 64, 64]} />
+//       <meshStandardMaterial map={texture} />
+//     </mesh>
+//   )
+// }
+
+// function Moon() {
+//   const ref: any = useRef()
+//   const texture = new THREE.TextureLoader().load("/textures/moon.jpg")
+
+//   useFrame(({ clock }) => {
+//     const t = clock.getElapsedTime()
+//     ref.current.position.x = Math.sin(t * 0.5) * 5
+//     ref.current.position.z = Math.cos(t * 0.5) * 5
+//   })
+
+//   return (
+//     <mesh ref={ref}>
+//       <sphereGeometry args={[0.5, 32, 32]} />
+//       <meshStandardMaterial map={texture} />
+//     </mesh>
+//   )
+// }
+
+// export default function EarthExplorer() {
+
+//   // 🔊 AUDIO REF
+//   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+//   useEffect(() => {
+//     const audio = new Audio('/earthexplorer.wav') // 🔁 change if needed
+//     audio.volume = 0.5
+//     audioRef.current = audio
+
+//     const playAudio = () => {
+//       audio.play().catch(() => {
+//         const resumeAudio = () => {
+//           audio.play()
+//           window.removeEventListener('click', resumeAudio)
+//         }
+//         window.addEventListener('click', resumeAudio)
+//       })
+//     }
+
+//     playAudio()
+
+//     return () => {
+//       audio.pause()
+//     }
+//   }, [])
+
+//   // 🔘 BUTTON FUNCTIONS
+//   const playSound = () => {
+//     audioRef.current?.play()
+//   }
+
+//   const stopSound = () => {
+//     if (audioRef.current) {
+//       audioRef.current.pause()
+//       audioRef.current.currentTime = 0
+//     }
+//   }
+
+//   return (
+//     <div className="w-full h-screen bg-black relative">
+
+//       {/* 🔘 BUTTON */}
+//       <div className="fixed bottom-5 right-5 z-50 flex border border-white">
+//         <button onClick={stopSound} className="bg-black text-white px-4 py-2">
+//           ⏹
+//         </button>
+//         <button onClick={playSound} className="bg-white text-black px-4 py-2">
+//           ▶️
+//         </button>
+//       </div>
+
+//       <Canvas camera={{ position: [0, 0, 7] }}>
+//         <ambientLight intensity={0.8} />
+//         <directionalLight position={[5, 3, 5]} intensity={2} />
+
+//         <Suspense fallback={null}>
+//           <Earth />
+//           <Moon />
+//         </Suspense>
+
+//         <Stars />
+//         <OrbitControls />
+//       </Canvas>
+//     </div>
+//   )
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client"
 
 import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, Stars } from "@react-three/drei"
-import { Suspense, useRef } from "react"
+import { Suspense, useRef, useEffect, useState } from "react"
 import * as THREE from "three"
 
 function Earth() {
@@ -40,8 +253,59 @@ function Moon() {
 }
 
 export default function EarthExplorer() {
+
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  useEffect(() => {
+    const audio = new Audio("/earthexplorer.wav")
+    audio.volume = 0.5
+    audio.loop = true
+
+    audioRef.current = audio
+
+    // ❌ autoplay may fail → so we DON’T force it
+    // user will start using button
+
+    return () => {
+      audio.pause()
+    }
+  }, [])
+
+  // ▶️ PLAY
+  const playSound = () => {
+    if (!audioRef.current) return
+
+    audioRef.current.play()
+      .then(() => setIsPlaying(true))
+      .catch(() => {
+        // fallback: user click required
+        console.log("Click button again to enable audio")
+      })
+  }
+
+  // ⏹ STOP
+  const stopSound = () => {
+    if (!audioRef.current) return
+
+    audioRef.current.pause()
+    audioRef.current.currentTime = 0
+    setIsPlaying(false)
+  }
+
   return (
-    <div className="w-full h-screen bg-black">
+    <div className="w-full h-screen bg-black relative">
+
+      {/* 🔘 BUTTON */}
+      <div className="fixed bottom-5 right-5 z-50 flex border border-white">
+        <button onClick={stopSound} className="bg-black text-white px-4 py-2">
+          ⏹
+        </button>
+        <button onClick={playSound} className="bg-white text-black px-4 py-2">
+          ▶️
+        </button>
+      </div>
+
       <Canvas camera={{ position: [0, 0, 7] }}>
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 3, 5]} intensity={2} />
