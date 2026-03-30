@@ -1,6 +1,6 @@
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
-import { ClerkProvider } from '@clerk/clerk-react'
+import { ClerkProvider } from '@clerk/react'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -26,10 +26,8 @@ if (!PUBLISHABLE_KEY) {
 }
 function App() {
   return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      
+    // <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 relative">
-
         {/* ⚡ Background */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
           <div className="absolute inset-0">
@@ -41,27 +39,22 @@ function App() {
               size={1}
             />
           </div>
-
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full"></div>
         </div>
-
         {/* Routes */}
         <div className="relative z-10">
           <Routes>
-
             <Route path="/sign-in/*" element={
               <div className="min-h-screen flex items-center justify-center">
                 <SignInPage />
               </div>
             } />
-
             <Route path="/sign-up/*" element={
               <div className="min-h-screen flex items-center justify-center">
                 <SignUpPage />
               </div>
             } />
-
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
@@ -74,22 +67,15 @@ function App() {
               {/* <Route path="vapi-agent" element={<VapiAgent />} /> */}
                <Route path="voice-agent" element={<VoiceAgent />} />
               <Route path="mini-projects" element={<MiniProjects />} />
-
               {/* ✅ AR PAGE */}
               <Route path="ar" element={<ARViewer />} />
-
             </Route>
-
           </Routes>
         </div>
-
       </div>
-
-    </ClerkProvider>
+    // </ClerkProvider>
   )
 }
-
-
 export default App
 
 

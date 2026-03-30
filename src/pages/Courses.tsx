@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { Link } from "react-router-dom";
 import { generateQuiz } from "../lib/gemini";
 import Quiz from "../components/Quiz";
@@ -348,7 +348,7 @@ export default Courses;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { Play, Award, Clock, ChevronRight } from "lucide-react";
 // import { generateQuiz } from "../lib/gemini";
@@ -757,7 +757,7 @@ export default Courses;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { generateQuiz } from "../lib/gemini";
 // import Quiz from "../components/Quiz";
@@ -950,7 +950,7 @@ export default Courses;
 
 // export default Courses;
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { generateQuiz } from "../lib/gemini";
 // import Quiz from "../components/Quiz";

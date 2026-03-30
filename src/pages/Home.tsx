@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, Target, Brain, CheckCircle, ChevronDown } from 'lucide-react'
-import { useAuth } from '@clerk/clerk-react'
+import { useAuth } from '@clerk/react'
 import { faqs, workflowSteps } from '../constant/index'
 import Lightning from '../components/Lightning'   // ⚡ Import Lightning
 import Hero from '@/components/landing/Hero'

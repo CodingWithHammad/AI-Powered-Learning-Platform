@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import {
   CheckCircle,
   XCircle,
@@ -418,7 +418,7 @@ export default Quiz;
 
 
 // import React, { useState, useEffect } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import {
 //   CheckCircle,
 //   XCircle,

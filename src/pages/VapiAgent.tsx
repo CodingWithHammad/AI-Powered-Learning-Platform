@@ -757,7 +757,7 @@
 // import { VapiControls } from "@/components/ui/vapi";
 
 // import { useState, useRef, useEffect } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { Mic, MicOff, Phone, PhoneOff, Volume2 } from "lucide-react";
 // import VapiClient from "@vapi-ai/web"; // ✅ Import official SDK
@@ -1004,7 +1004,7 @@
 
 
 import { useState, useRef, useEffect } from "react";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { Link } from "react-router-dom";
 import { Mic, MicOff, Volume2 } from "lucide-react";
 import VapiClient from "@vapi-ai/web";

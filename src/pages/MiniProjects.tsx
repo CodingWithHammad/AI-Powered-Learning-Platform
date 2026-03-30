@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react"
-import { useAuth } from "@clerk/clerk-react"
+import { useAuth } from "@clerk/react"
 import {
   ArrowLeft,
   Copy,
@@ -645,7 +645,7 @@ export default MiniProjects
 
 
 // import { useState, useMemo } from "react"
-// import { useAuth } from "@clerk/clerk-react"
+// import { useAuth } from "@clerk/react"
 // import {
 //   Eye,
 //   ArrowLeft,

@@ -443,7 +443,7 @@
 
 
 // import { Outlet, Link, useLocation } from "react-router-dom"
-// import { UserButton, useAuth } from "@clerk/clerk-react"
+// import { UserButton, useAuth } from "@clerk/react"
 // import { Menu } from "lucide-react"
 
 // import {
@@ -653,7 +653,7 @@
 
 
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { UserButton, useAuth } from "@clerk/clerk-react"
+import { UserButton, useAuth } from "@clerk/react"
 import { Menu } from "lucide-react"
 
 import {

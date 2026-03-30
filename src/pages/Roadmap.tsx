@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { generateRoadmap } from "../lib/gemini";
@@ -269,7 +269,7 @@ export default Roadmap;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateRoadmap } from "../lib/gemini";
@@ -563,7 +563,7 @@ export default Roadmap;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateRoadmap } from "../lib/gemini";
@@ -840,7 +840,7 @@ export default Roadmap;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateRoadmap } from "../lib/gemini";
@@ -1244,7 +1244,7 @@ export default Roadmap;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import {
 //   Map,

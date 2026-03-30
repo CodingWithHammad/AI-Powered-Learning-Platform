@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { generateLibraryNotes } from "../lib/gemini";
@@ -223,7 +223,7 @@ export default Library;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateLibraryNotes } from "../lib/gemini";
@@ -455,7 +455,7 @@ export default Library;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateLibraryNotes } from "../lib/gemini";
@@ -733,7 +733,7 @@ export default Library;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { ChevronDown } from "lucide-react";
 // import { generateLibraryNotes } from "../lib/gemini";
@@ -977,7 +977,7 @@ export default Library;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { generateLibraryNotes } from "../lib/gemini";
 
@@ -1176,7 +1176,7 @@ export default Library;
 
 
 // import { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 // import { generateNotes } from "../lib/gemini"; // 👈 NEW FUNCTION
 // import { languages } from "../constant";
@@ -1436,7 +1436,7 @@ export default Library;
 
 
 // import React, { useState } from "react";
-// import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/react";
 // import { Link } from "react-router-dom";
 
 // const Library: React.FC = () => {
