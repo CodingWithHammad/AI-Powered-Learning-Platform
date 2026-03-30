@@ -1,3 +1,181 @@
+// import React, { useEffect, useState, useMemo, useRef } from 'react';
+
+// const Hero: React.FC = () => {
+
+//   const [logs] = useState([
+//     { time: '10:42:02', msg: 'Connecting to cluster: us-east-1', type: 'info' },
+//     { time: '10:42:03', msg: 'WARN: Latency spike detected (42ms)', type: 'warn' },
+//     { time: '10:42:03', msg: 'Auto-scaling engaged', type: 'info' },
+//     { time: '10:42:04', msg: 'New node provisioned: node-884', type: 'info' },
+//     { time: '10:42:05', msg: 'Syncing database shards...', type: 'info' },
+//   ]);
+
+//   const streaks = useMemo(() => {
+//     return Array.from({ length: 15 }).map(() => ({
+//       left: `${Math.random() * 100}%`,
+//       delay: `${Math.random() * 5}s`,
+//       duration: `${3 + Math.random() * 4}s`,
+//       opacity: 0.1 + Math.random() * 0.3
+//     }));
+//   }, []);
+
+//   // ✅ AUDIO REF
+//   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+//   // ✅ AUTOPLAY LOGIC
+//   useEffect(() => {
+//     const audio = audioRef.current;
+//     if (!audio) return;
+
+//     audio.volume = 0.5;
+
+//     const tryPlay = () => {
+//       audio.play().catch(() => {
+//         const resumeAudio = () => {
+//           audio.play();
+//           window.removeEventListener('click', resumeAudio);
+//         };
+//         window.addEventListener('click', resumeAudio);
+//       });
+//     };
+
+//     tryPlay();
+
+//     return () => {
+//       audio.pause();
+//       audio.currentTime = 0;
+//     };
+//   }, []);
+
+//   // ✅ CONTROLS
+//   const playSound = () => {
+//     audioRef.current?.play();
+//   };
+
+//   const pauseSound = () => {
+//     if (audioRef.current) {
+//       audioRef.current.pause();
+//       audioRef.current.currentTime = 0; // 🔥 full stop
+//     }
+//   };
+
+//   return (
+//     <section className="relative min-h-screen flex items-center px-6 lg:px-20 overflow-hidden pt-20">
+
+//       {/* ✅ AUDIO ELEMENT (IMPORTANT) */}
+//       <audio ref={audioRef} src="/download.wav" />
+
+//       {/* Sidebar */}
+//       <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-20">
+//         {[1, 2, 3, 4, 5, 6].map((num) => (
+//           <div key={num} className={`w-8 h-8 border flex items-center justify-center text-[10px] mono cursor-pointer ${num === 1 ? 'border-purple-500 text-purple-500' : 'border-white/10 text-white/30'}`}>
+//             0{num}
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Background */}
+//       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+//         {streaks.map((s, i) => (
+//           <div 
+//             key={i} 
+//             className="light-streak" 
+//             style={{ 
+//               left: s.left, 
+//               animationDelay: s.delay, 
+//               animationDuration: s.duration,
+//               opacity: s.opacity 
+//             }} 
+//           />
+//         ))}
+//       </div>
+
+//       {/* Content */}
+//       <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
+
+//         {/* LEFT */}
+//         <div className="lg:col-span-7 space-y-8">
+
+//           <h1 className="text-6xl md:text-8xl font-black text-white uppercase">
+//             LEARNAI <br />
+//             <span className="text-white/20">COHORT</span>
+//           </h1>
+
+//           <p className="text-white/50 max-w-md">
+//             Operate distributed learning systems with real-time automation.
+//           </p>
+
+//           {/* 🔘 BUTTONS */}
+//           <div className="fixed bottom-5 right-5 z-50 flex rounded-xl overflow-hidden shadow-lg border border-white/20 backdrop-blur-lg">
+
+//             <button 
+//               onClick={pauseSound}
+//               className="bg-black/70 hover:bg-black text-white px-5 py-3 text-xl transition-all"
+//             >
+//               ⏸
+//             </button>
+
+//             <button 
+//               onClick={playSound}
+//               className="bg-purple-500 hover:bg-purple-400 text-black px-5 py-3 text-xl transition-all"
+//             >
+//               ▶
+//             </button>
+
+//           </div>
+
+//         </div>
+
+//         {/* RIGHT PANEL */}
+//         <div className="lg:col-span-5 hidden lg:block">
+//           <div className="bg-[#050505] border border-white/10 p-6 space-y-4">
+
+//             {logs.map((log, i) => (
+//               <div key={i} className="flex gap-4 text-sm">
+//                 <span className="text-white/20">{log.time}</span>
+//                 <span className={log.type === 'warn' ? 'text-purple-400' : 'text-white/60'}>
+//                   {log.msg}
+//                 </span>
+//               </div>
+//             ))}
+
+//           </div>
+//         </div>
+
+//       </div>
+
+//     </section>
+//   );
+// };
+
+// export default Hero;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5,7 +183,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 
 const Hero: React.FC = () => {
-  const [logs, setLogs] = useState([
+  const [logs] = useState([
     { time: '10:42:02', msg: 'Connecting to cluster: us-east-1', type: 'info' },
     { time: '10:42:03', msg: 'WARN: Latency spike detected (42ms)', type: 'warn' },
     { time: '10:42:03', msg: 'Auto-scaling engaged', type: 'info' },
@@ -14,39 +192,39 @@ const Hero: React.FC = () => {
   ]);
 
   // Generate random light streaks
-  const streaks = useMemo(() => {
-    return Array.from({ length: 15 }).map((_, i) => ({
-      left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${3 + Math.random() * 4}s`,
-      opacity: 0.1 + Math.random() * 0.3
-    }));
-  }, []);
+  // const streaks = useMemo(() => {
+  //   return Array.from({ length: 15 }).map(() => ({
+  //     left: `${Math.random() * 100}%`,
+  //     delay: `${Math.random() * 5}s`,
+  //     duration: `${3 + Math.random() * 4}s`,
+  //     opacity: 0.1 + Math.random() * 0.3
+  //   }));
+  // }, []);
 
 
 // const audioRef = useRef<HTMLAudioElement | null>(null)
-const audioRef = useRef<HTMLAudioElement | null>(null)
+// const audioRef = useRef<HTMLAudioElement | null>(null)
 
-useEffect(() => {
-  const audio = new Audio('/download.wav')
-  audio.volume = 0.5
-  audio.loop = false // 🔥 optional but recommended
+// useEffect(() => {
+//   const audio = new Audio('/download.wav')
+//   audio.volume = 0.5
+//   audio.loop = false // 🔥 optional but recommended
 
-  audioRef.current = audio
+//   audioRef.current = audio
 
-  // autoplay once
-  audio.play().catch(() => {
-    const resumeAudio = () => {
-      audio.play()
-      window.removeEventListener('click', resumeAudio)
-    }
-    window.addEventListener('click', resumeAudio)
-  })
+//   // autoplay once
+//   audio.play().catch(() => {
+//     const resumeAudio = () => {
+//       audio.play()
+//       window.removeEventListener('click', resumeAudio)
+//     }
+//     window.addEventListener('click', resumeAudio)
+//   })
 
-  return () => {
-    audio.pause()
-  }
-}, [])
+//   return () => {
+//     audio.pause()
+//   }
+// }, [])
 // useEffect(() => {
 //   const audio = new Audio('/download.wav')
 //   audio.volume = 0.5
@@ -75,18 +253,18 @@ useEffect(() => {
 
 
 
-const playSound = () => {
-  if (audioRef.current && audioRef.current.paused) {
-    audioRef.current.play()
-  }
-}
+// const playSound = () => {
+//   if (audioRef.current && audioRef.current.paused) {
+//     audioRef.current.play()
+//   }
+// }
 
-const pauseSound = () => {
-  if (audioRef.current && !audioRef.current.paused) {
-    audioRef.current.pause()
-  }
-}
-// 🔘 controls
+// const pauseSound = () => {
+//   if (audioRef.current && !audioRef.current.paused) {
+//     audioRef.current.pause()
+//   }
+// }
+// // 🔘 controls
 // const playSound = () => {
 //   audioRef.current?.play()
 // }
@@ -143,6 +321,54 @@ const pauseSound = () => {
 
 
 
+  const streaks = useMemo(() => {
+    return Array.from({ length: 15 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${3 + Math.random() * 4}s`,
+      opacity: 0.1 + Math.random() * 0.3
+    }));
+  }, []);
+
+  // ✅ AUDIO REF
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // ✅ AUTOPLAY LOGIC
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.5;
+
+    const tryPlay = () => {
+      audio.play().catch(() => {
+        const resumeAudio = () => {
+          audio.play();
+          window.removeEventListener('click', resumeAudio);
+        };
+        window.addEventListener('click', resumeAudio);
+      });
+    };
+
+    tryPlay();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
+
+  // ✅ CONTROLS
+  const playSound = () => {
+    audioRef.current?.play();
+  };
+
+  const pauseSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // 🔥 full stop
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center px-6 lg:px-20 overflow-hidden pt-20">
@@ -234,6 +460,8 @@ const pauseSound = () => {
               SUB-10MS FEEDBACK EXECUTION
             </li>
           </ul>
+          </div>
+{/* 
    <div className="fixed bottom-5 right-5 z-50 flex border border-white">
   <button onClick={pauseSound} className="bg-black text-white px-4 py-2">
     ⏸
@@ -241,7 +469,25 @@ const pauseSound = () => {
   <button onClick={playSound} className="bg-white text-black px-4 py-2">
     ▶
   </button>
-</div>
+</div> */}
+
+           {/* 🔘 BUTTONS */}
+                      <div className="fixed bottom-5 right-5 z-50 flex rounded-xl overflow-hidden shadow-lg border border-white/20 backdrop-blur-lg">
+
+         <button 
+              onClick={pauseSound}
+              className="bg-black/70 hover:bg-black text-white px-5 py-3 text-xl transition-all"
+            >
+              ⏸
+            </button>
+
+            <button 
+              onClick={playSound}
+              className="bg-purple-500 hover:bg-purple-400 text-black px-5 py-3 text-xl transition-all"
+            >
+              ▶
+            </button>
+
 
           <div className="flex flex-wrap gap-4 pt-4">
             <button className="bg-purple-600 hover:bg-purple-500 text-black px-8 py-4 mono text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all group">
