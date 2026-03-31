@@ -580,7 +580,6 @@ export default function SolarSystem() {
 
   // 🔊 AUDIO REF
   const audioRef = useRef<HTMLAudioElement | null>(null)
-
   useEffect(() => {
 
     // ✅ AUDIO SETUP (NO AUTOPLAY)
