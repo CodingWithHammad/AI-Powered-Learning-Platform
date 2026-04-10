@@ -574,7 +574,6 @@ import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 import { OrbitControls } from "three-stdlib"
 
-
 export default function SolarSystem() {
   const mountRef = useRef<HTMLDivElement>(null)
   // 🔊 AUDIO REF
