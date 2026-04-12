@@ -578,7 +578,9 @@ import { OrbitControls } from "three-stdlib"
 
 export default function SolarSystem() {
   const mountRef = useRef<HTMLDivElement>(null)
+  
   // 🔊 AUDIO REF
+
   const audioRef = useRef<HTMLAudioElement | null>(null)
   useEffect(() => {
 
