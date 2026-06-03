@@ -39,7 +39,7 @@ const Features: React.FC = () => {
     <section id="about" className="py-24 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Why Choose LearnAI?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Why Choose AR?</h2>
           <p className="text-zinc-500 max-w-xl text-lg font-light">
             We've built a complete ecosystem designed to accelerate your mastery of programming 
             through the power of generative intelligence.

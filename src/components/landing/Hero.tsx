@@ -3052,8 +3052,8 @@ const audioRef = useRef<HTMLAudioElement | null>(null);
 
           <div className="space-y-0">
             <h1 className="text-6xl md:text-8xl font-black tracking-tight leading-[0.85] text-white uppercase">
-              LEARNAI<br />
-              <span className="text-white/20">COHORT</span>
+              LEARN<br />
+              <span className="text-white/20">AI</span>
             </h1>
           </div>
 
