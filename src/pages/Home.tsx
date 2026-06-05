@@ -14,6 +14,7 @@ const Home = () => {
   const { isSignedIn } = useAuth()
   const [openFAQ, setOpenFAQ] = React.useState<number | null>(null)
 
+
   
   return (
     <div className="relative min-h-screen bg-black text-white">

@@ -10,6 +10,7 @@
 //     { time: '10:42:05', msg: 'Syncing database shards...', type: 'info' },
 //   ]);
 
+
 //   const streaks = useMemo(() => {
 //     return Array.from({ length: 15 }).map(() => ({
 //       left: `${Math.random() * 100}%`,
