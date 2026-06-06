@@ -25,6 +25,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+
         <div>
           <h4 className="text-[10px] font-bold text-zinc-300 uppercase tracking-[0.4em] mb-8">Platform</h4>
           <ul className="space-y-4 text-sm text-zinc-500 font-light">
