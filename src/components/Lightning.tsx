@@ -9,7 +9,6 @@ interface LightningProps {
   size?: number;
 }
 
-
 const Lightning: React.FC<LightningProps> = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
